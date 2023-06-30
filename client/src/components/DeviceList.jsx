@@ -6,9 +6,8 @@ import DeviceItem from './DeviceItem';
 
 const DeviceList = observer(() => {
   const { device } = useContext(Context);
-  console.log(device._devices);
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} sx={{ marginTop: '10px' }}>
       {device._devices.map((device) => (
         <Grid
           item

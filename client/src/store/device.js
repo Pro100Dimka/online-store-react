@@ -78,6 +78,13 @@ export default class DeviceStore {
         rating: 5,
         img: 'https://bipbap.ru/wp-content/uploads/2017/04/000f_7290754.jpg',
       },
+      {
+        id: 9,
+        name: '444444',
+        price: 5000,
+        rating: 5,
+        img: 'https://bipbap.ru/wp-content/uploads/2017/04/000f_7290754.jpg',
+      },
     ];
     this._selectedType = {};
     this._selectedBrand = {};

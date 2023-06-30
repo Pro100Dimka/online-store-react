@@ -1,7 +1,7 @@
-import AdminPanel from '../../pages/AdminPanel';
+import AdminPanel from '../../pages/Admin';
 import Basket from '../../pages/Basket';
 import Shop from '../../pages/Shop';
-import Device from '../../pages/Device';
+import Device from '../../pages/DeviceCard';
 import Auth from '../../pages/Auth';
 
 import {

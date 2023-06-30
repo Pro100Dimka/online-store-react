@@ -7,7 +7,6 @@ import { useLocation } from 'react-router-dom';
 function Auth() {
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
-  console.log(location);
   return (
     <Container
       className="d-flex justify-content-center align-items-center"

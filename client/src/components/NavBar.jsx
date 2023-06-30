@@ -12,10 +12,11 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
-import { SHOP_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
 
 const darkTheme = createTheme({
   palette: {
@@ -26,6 +27,7 @@ const darkTheme = createTheme({
   },
 });
 const NavBar = observer(() => {
+  const navigate = useNavigate();
   const { user } = useContext(Context);
   const [anchorElNav, setAnchorElNav] = useState(null);
   const handleOpenNavMenu = (event) => {
@@ -132,7 +134,10 @@ const NavBar = observer(() => {
               {user._isAuth ? (
                 <>
                   <Button
-                    onClick={handleCloseNavMenu}
+                    onClick={() => {
+                      handleCloseNavMenu();
+                      navigate(ADMIN_ROUTE);
+                    }}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     Адмін Панель

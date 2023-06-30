@@ -6,10 +6,10 @@ import { Context } from '../..';
 
 function AppRouter() {
   const { user } = useContext(Context);
-  console.log(user);
+  console.log();
   return (
     <Routes>
-      {user.isAuth &&
+      {user._isAuth &&
         authRoutes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} exact />
         ))}
