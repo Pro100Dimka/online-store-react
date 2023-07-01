@@ -11,6 +11,7 @@ class userController {
   //Регистрация
   async registration(req, res, next) {
     const { email, password, role, phone, name, surname } = req.body;
+
     if (!email || !password || !phone || !name || !surname)
       return next(apiError.badRequest('Введено не корректні дані'));
     const candidate = await User.findOne({ where: { email } });
@@ -26,7 +27,14 @@ class userController {
       surname,
     });
     // const basket = await Basket.create({ userId: user.id });
-    const token = generateGwt(user.id, user.email, user.role);
+    const token = generateGwt(
+      user.id,
+      user.email,
+      user.role,
+      user.phone,
+      user.name,
+      user.surname
+    );
     return res.json({ token });
   }
 
@@ -43,7 +51,14 @@ class userController {
   }
   // Проверка авторизирован ли пользователь
   async checkLogin(req, res, next) {
-    const token = generateGwt(req.user.id, req.user.email, req.user.role);
+    const token = generateGwt(
+      req.user.id,
+      req.user.email,
+      req.user.role,
+      req.user.phone,
+      req.user.name,
+      req.user.surname
+    );
     return res.json({ token });
   }
 }

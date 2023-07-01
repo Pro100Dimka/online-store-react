@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
-import { ADMIN_ROUTE, SHOP_ROUTE } from '../utils/consts';
+import { ADMIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -103,7 +103,7 @@ const NavBar = observer(() => {
                   <MenuItem
                     onClick={() => {
                       handleCloseNavMenu();
-                      user.setIsAuth(true);
+                      navigate(REGISTRATION_ROUTE);
                     }}
                   >
                     <Typography textAlign="center">Авторизація</Typography>
@@ -116,7 +116,7 @@ const NavBar = observer(() => {
               variant="h5"
               noWrap
               component="a"
-              href=""
+              href={SHOP_ROUTE}
               sx={{
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
@@ -153,7 +153,7 @@ const NavBar = observer(() => {
                 <Button
                   onClick={() => {
                     handleCloseNavMenu();
-                    user.setIsAuth(true);
+                    navigate(REGISTRATION_ROUTE);
                   }}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
