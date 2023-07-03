@@ -1,9 +1,37 @@
 import { login, registration } from '../../../components/apiHelper/userApi';
-const submit = async (values, isLogin) => {
+import { SHOP_ROUTE } from '../../../utils/consts';
+
+const submit = async (
+  values,
+  isLogin,
+  enqueueSnackbar,
+  authApi,
+  user,
+  navigate
+) => {
   const { email, password, name, surname, phone } = values;
-  let responce;
-  if (isLogin) responce = await login();
-  else responce = await registration(email, password, name, surname, phone);
-  console.log(responce);
+  if (isLogin)
+    await login(email, password)
+      .then((response) => {
+        user.setIsAuth(true);
+        user.setUser(response);
+        navigate(SHOP_ROUTE);
+      })
+      .catch((error) => {
+        enqueueSnackbar(error.response.data.message, { variant: 'error' });
+      });
+  // authApi.createItem(values).then((response) => {
+  //   console.log('response', response);
+  // });
+  else
+    await registration(email, password, name, surname, phone)
+      .then((response) => {
+        user.setIsAuth(true);
+        user.setUser(response);
+        navigate(SHOP_ROUTE);
+      })
+      .catch((error) => {
+        enqueueSnackbar(error.response.data.message, { variant: 'error' });
+      });
 };
 export default submit;

@@ -1,22 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
-import { REGISTRATION_ROUTE, LOGIN_ROUTE } from '../../utils/consts';
+import { useSnackbar } from 'notistack';
+import {
+  REGISTRATION_ROUTE,
+  LOGIN_ROUTE,
+  USER_REGISTRATION,
+} from '../../utils/consts';
 import { Grid, Link, Typography } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import NewFormikObject from '../../components/getFormik';
 import initialValues from './formik/initialValues';
-import schema from './formik/schema';
+import Schema from './formik/schema';
 import submit from './formik/Submit';
 import { Form, FormikProvider } from 'formik';
 import GridTextField from '../../components/fields/GridTextField';
+import ApiService from '../../components/apiHelper/apiService';
+import { Context } from '../../index';
 
 function Auth() {
+  const navigate = useNavigate();
+  const { user } = useContext(Context);
+  const authApi = new ApiService(USER_REGISTRATION);
+  const { enqueueSnackbar } = useSnackbar();
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
   const onSubmit = (values) => {
-    submit(values, isLogin);
+    submit(values, isLogin, enqueueSnackbar, authApi, user, navigate);
   };
-  const formik = NewFormikObject(initialValues, schema, onSubmit);
+
+  const formik = NewFormikObject(initialValues, Schema(isLogin), onSubmit);
   const { handleSubmit } = formik;
 
   return (
@@ -40,30 +52,34 @@ function Auth() {
             }}
           >
             <Grid container spacing={2} style={{ marginTop: '10px' }}>
-              <GridTextField
-                sm={12}
-                xs={12}
-                md={6}
-                labelParagraph="Введіть ім`я"
-                field="name"
-                formik={formik}
-              />
-              <GridTextField
-                sm={12}
-                xs={12}
-                md={6}
-                labelParagraph="Введіть прізвище"
-                field="surname"
-                formik={formik}
-              />
-              <GridTextField
-                sm={12}
-                xs={12}
-                md={12}
-                labelParagraph="Введіть номер телефону"
-                field="phone"
-                formik={formik}
-              />
+              {!isLogin && (
+                <>
+                  <GridTextField
+                    sm={12}
+                    xs={12}
+                    md={6}
+                    labelParagraph="Введіть ім`я"
+                    field="name"
+                    formik={formik}
+                  />
+                  <GridTextField
+                    sm={12}
+                    xs={12}
+                    md={6}
+                    labelParagraph="Введіть прізвище"
+                    field="surname"
+                    formik={formik}
+                  />
+                  <GridTextField
+                    sm={12}
+                    xs={12}
+                    md={12}
+                    labelParagraph="Введіть номер телефону"
+                    field="phone"
+                    formik={formik}
+                  />
+                </>
+              )}
               <GridTextField
                 sm={12}
                 xs={12}

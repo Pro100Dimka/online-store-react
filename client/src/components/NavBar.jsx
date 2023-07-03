@@ -12,7 +12,12 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
-import { ADMIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts';
+import {
+  ADMIN_ROUTE,
+  LOGIN_ROUTE,
+  REGISTRATION_ROUTE,
+  SHOP_ROUTE,
+} from '../utils/consts';
 import { observer } from 'mobx-react-lite';
 import { Context } from '..';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -36,7 +41,11 @@ const NavBar = observer(() => {
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
-
+  const logOut = () => {
+    localStorage.removeItem('token');
+    user.setUser({});
+    user.setIsAuth(false);
+  };
   return (
     <ThemeProvider theme={darkTheme}>
       <AppBar position="static">
@@ -143,7 +152,10 @@ const NavBar = observer(() => {
                     Адмін Панель
                   </Button>
                   <Button
-                    onClick={handleCloseNavMenu}
+                    onClick={() => {
+                      logOut();
+                      handleCloseNavMenu();
+                    }}
                     sx={{ my: 2, color: 'white', display: 'block' }}
                   >
                     Вийти
@@ -153,7 +165,7 @@ const NavBar = observer(() => {
                 <Button
                   onClick={() => {
                     handleCloseNavMenu();
-                    navigate(REGISTRATION_ROUTE);
+                    navigate(LOGIN_ROUTE);
                   }}
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >

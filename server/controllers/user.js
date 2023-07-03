@@ -2,21 +2,25 @@ const apiError = require('../errors/api');
 const bcrypt = require('bcrypt'); // для хеширования паролей
 const jwt = require('jsonwebtoken');
 const { User, Basket } = require('../models/models');
-const generateGwt = (id, email, role) => {
-  return jwt.sign({ id, email, role }, process.env.SECRET_KEY, {
-    expiresIn: '24h',
-  });
+const generateGwt = (id, email, role, phone, name, surname) => {
+  return jwt.sign(
+    { id, email, role, phone, name, surname },
+    process.env.SECRET_KEY,
+    {
+      expiresIn: '24h',
+    }
+  );
 };
 class userController {
   //Регистрация
   async registration(req, res, next) {
     const { email, password, role, phone, name, surname } = req.body;
-
     if (!email || !password || !phone || !name || !surname)
       return next(apiError.badRequest('Введено не корректні дані'));
     const candidate = await User.findOne({ where: { email } });
-    if (candidate)
+    if (candidate) {
       return next(apiError.badRequest('Користувач з такою поштою вже існує'));
+    }
     const hashPassword = await bcrypt.hash(password, 5);
     const user = await User.create({
       email,
@@ -46,7 +50,14 @@ class userController {
       return next(apiError.internal('Користувача не знайдено з такою поштою'));
     let comparePassword = bcrypt.compareSync(password, user.password);
     if (!comparePassword) return next(apiError.internal('Пароль не вірний'));
-    const token = generateGwt(user.id, user.email, user.role);
+    const token = generateGwt(
+      user.id,
+      user.email,
+      user.role,
+      user.phone,
+      user.name,
+      user.surname
+    );
     return res.json({ token });
   }
   // Проверка авторизирован ли пользователь

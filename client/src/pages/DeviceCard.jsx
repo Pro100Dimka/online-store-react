@@ -1,24 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { Grid, Typography } from '@mui/material';
-
 import Star from '../img/Star1.png';
+import { useParams } from 'react-router-dom';
+import { fetchDevice } from '../components/apiHelper/apiDevice';
 
 function DevicePage() {
-  const device = {
-    id: 7,
-    name: 'Iphone 12 Pro',
-    price: 5000,
-    rating: 5,
-    img: 'https://bipbap.ru/wp-content/uploads/2017/04/000f_7290754.jpg',
-  };
-  const description = [
-    { id: 1, title: 'Оперативная память', description: '5 гб' },
-    { id: 2, title: 'Камера', description: '5 гб' },
-    { id: 3, title: 'Процессор', description: '5 гб' },
-    { id: 4, title: 'Кол-во ядер', description: '5 гб' },
-    { id: 5, title: 'Аккамулятор', description: '5 гб' },
-  ];
+  const { id } = useParams();
+  const [device, setDevice] = useState({ info: [] });
+  useEffect(() => {
+    fetchDevice(id).then((response) => {
+      setDevice(response);
+    });
+  }, [id]);
   return (
     <Container style={{ maxWidth: '90%' }}>
       <Grid container>
@@ -32,7 +26,11 @@ function DevicePage() {
             flexDirection: 'column',
           }}
         >
-          <Image width={400} height={400} src={device.img} />
+          <Image
+            width={400}
+            height={400}
+            src={`${process.env.REACT_APP_API_URL}/${device.img}`}
+          />
         </Grid>
         <Grid
           item
@@ -85,7 +83,7 @@ function DevicePage() {
         </Grid>
         <Grid item md={12}>
           <h1>Характеристики</h1>
-          {description.map((desc, index) => (
+          {device.info.map((desc, index) => (
             <Grid
               item
               key={desc.id}

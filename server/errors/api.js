@@ -7,6 +7,7 @@ class apiError extends Error {
     this.message = message;
   }
   static badRequest(message) {
+    console.log('message', message);
     return new apiError(404, message);
   }
   static internal(message) {

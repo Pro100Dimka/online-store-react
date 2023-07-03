@@ -18,7 +18,11 @@ const DeviceItem = ({ device }) => {
       onClick={() => navigate(`${DEVICE_ROUTE}/${device.id}`)}
       border={'light'}
     >
-      <Image width={175} height={175} src={device.img} />
+      <Image
+        width={175}
+        height={175}
+        src={`${process.env.REACT_APP_API_URL}/${device.img}`}
+      />
       <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
         <Typography variant="subtitle1">Samsung...</Typography>
         <Typography>
