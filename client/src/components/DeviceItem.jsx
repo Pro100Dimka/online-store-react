@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Typography } from '@mui/material';
-import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';

@@ -8,6 +8,7 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material';
+import { SELECTED_BRAND } from '../utils/consts';
 
 const BrandBar = observer(() => {
   const { device } = useContext(Context);
@@ -27,30 +28,31 @@ const BrandBar = observer(() => {
           '::-webkit-scrollbar': { display: 'none' },
         }}
       >
-        {device._brands.map((brand, key) => (
-          <ListItem
-            sx={{
-              borderRadius: '5px 5px 0 0',
-              border:
-                brand.id === device._selectedBrand.id
-                  ? '1px solid rgba(128, 128, 128, 0.5)'
-                  : 'none',
-              borderBottom: '1px solid rgba(128, 128, 128, 0.5)',
-            }}
-            disablePadding
-            key={brand.id}
-          >
-            <ListItemButton
-              style={{
-                cursor: 'pointer',
+        {device._brands.rows &&
+          device._brands?.rows.map((brand, key) => (
+            <ListItem
+              sx={{
+                borderRadius: '5px 5px 0 0',
+                border:
+                  brand.id === device._selectedBrand.id
+                    ? '1px solid rgba(128, 128, 128, 0.5)'
+                    : 'none',
+                borderBottom: '1px solid rgba(128, 128, 128, 0.5)',
               }}
-              selected={brand.id === device._selectedBrand.id}
-              onClick={() => device.setSelectedBrand(brand)}
+              disablePadding
+              key={brand.id}
             >
-              <ListItemText primary={brand.name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+              <ListItemButton
+                style={{
+                  cursor: 'pointer',
+                }}
+                selected={brand.id === device._selectedBrand.id}
+                onClick={() => device.setStoreItems(SELECTED_BRAND, brand)}
+              >
+                <ListItemText primary={brand.name} />
+              </ListItemButton>
+            </ListItem>
+          ))}
       </List>
     </Box>
   );

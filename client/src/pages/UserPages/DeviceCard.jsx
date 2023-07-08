@@ -1,17 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
 import { Grid, Typography } from '@mui/material';
-import Star from '../img/Star1.png';
+import Star from '../../img/Star1.png';
 import { useParams } from 'react-router-dom';
-import { fetchDevice } from '../components/apiHelper/apiDevice';
+import ApiService, { fetchDevice } from '../../components/apiHelper/apiDevice';
+import { DEVICE_ROUTE } from '../../utils/consts';
+import { enqueueSnackbar } from 'notistack';
 
 function DevicePage() {
+  const apiDevice = new ApiService(DEVICE_ROUTE);
   const { id } = useParams();
   const [device, setDevice] = useState({ info: [] });
   useEffect(() => {
-    fetchDevice(id).then((response) => {
-      setDevice(response);
-    });
+    apiDevice
+      .getItemById(id)
+      .then((response) => {
+        setDevice(response);
+      })
+      .catch((error) =>
+        enqueueSnackbar(error.response.data.message, { variant: 'error' })
+      );
   }, [id]);
   return (
     <Container style={{ maxWidth: '90%' }}>

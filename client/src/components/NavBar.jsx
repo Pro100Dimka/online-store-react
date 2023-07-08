@@ -34,6 +34,7 @@ const darkTheme = createTheme({
 const NavBar = observer(() => {
   const navigate = useNavigate();
   const { user } = useContext(Context);
+  const { role } = user.getUser();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -45,6 +46,7 @@ const NavBar = observer(() => {
     localStorage.removeItem('token');
     user.setUser({});
     user.setIsAuth(false);
+    navigate(SHOP_ROUTE);
   };
   return (
     <ThemeProvider theme={darkTheme}>
@@ -140,27 +142,27 @@ const NavBar = observer(() => {
               Зайца Магазин
             </Typography>
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              {role === 'ADMIN' && (
+                <Button
+                  onClick={() => {
+                    navigate(ADMIN_ROUTE);
+                    handleCloseNavMenu();
+                  }}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Адмін Панель
+                </Button>
+              )}
               {user._isAuth ? (
-                <>
-                  <Button
-                    onClick={() => {
-                      handleCloseNavMenu();
-                      navigate(ADMIN_ROUTE);
-                    }}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                    Адмін Панель
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      logOut();
-                      handleCloseNavMenu();
-                    }}
-                    sx={{ my: 2, color: 'white', display: 'block' }}
-                  >
-                    Вийти
-                  </Button>
-                </>
+                <Button
+                  onClick={() => {
+                    logOut();
+                    handleCloseNavMenu();
+                  }}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Вийти
+                </Button>
               ) : (
                 <Button
                   onClick={() => {

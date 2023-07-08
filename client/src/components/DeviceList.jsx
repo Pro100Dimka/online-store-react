@@ -6,7 +6,6 @@ import DeviceItem from './DeviceItem';
 
 const DeviceList = observer(() => {
   const { device } = useContext(Context);
-  console.log(device._devices);
   return (
     device._devices.rows && (
       <Grid container spacing={2} sx={{ marginTop: '10px' }}>

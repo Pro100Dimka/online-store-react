@@ -1,8 +1,8 @@
 const initialValues = {
-  email: '',
-  password: '',
-  phone: '',
+  id: null,
   name: '',
-  surname: '',
+  typeId: '',
+  brandId: '',
+  price: '',
 };
 export default initialValues;

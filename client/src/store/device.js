@@ -1,4 +1,11 @@
 import { makeAutoObservable } from 'mobx';
+import {
+  BRAND_ROUTE,
+  DEVICE_ROUTE,
+  SELECTED_BRAND,
+  SELECTED_TYPE,
+  TYPE_ROUTE,
+} from '../utils/consts';
 export default class DeviceStore {
   constructor() {
     this._types = [];
@@ -8,34 +15,41 @@ export default class DeviceStore {
     this._selectedBrand = {};
     makeAutoObservable(this); // при изминениях в переменных выше мобх будет отслеживать и отрендривать заново
   }
-  setTypes(types) {
-    this._types = types;
+  setStoreItems(type, items) {
+    switch (type) {
+      case TYPE_ROUTE:
+        this._types = items;
+        break;
+      case BRAND_ROUTE:
+        this._brands = items;
+        break;
+      case DEVICE_ROUTE:
+        this._devices = items;
+        break;
+      case SELECTED_TYPE:
+        this._selectedType = items;
+        break;
+      case SELECTED_BRAND:
+        this._selectedBrand = items;
+        break;
+      default:
+        break;
+    }
   }
-  setBrands(brands) {
-    this._brands = brands;
-  }
-  setDevices(devices) {
-    this._devices = devices;
-  }
-  setSelectedType(type) {
-    this._selectedType = type;
-  }
-  setSelectedBrand(brand) {
-    this._selectedBrand = brand;
-  }
-  getTypes() {
-    return this._types;
-  }
-  getBrands() {
-    return this._brands;
-  }
-  getDevices() {
-    return this._devices;
-  }
-  getSelectedType() {
-    return this._selectedType;
-  }
-  getSelectedBrand() {
-    return this._selectedBrand;
+  getStoreItems(type) {
+    switch (type) {
+      case TYPE_ROUTE:
+        return this._types;
+      case BRAND_ROUTE:
+        return this._brands;
+      case DEVICE_ROUTE:
+        return this._devices;
+      case SELECTED_TYPE:
+        return this._selectedType;
+      case SELECTED_BRAND:
+        return this._selectedBrand;
+      default:
+        return;
+    }
   }
 }

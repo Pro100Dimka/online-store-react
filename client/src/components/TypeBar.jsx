@@ -8,6 +8,7 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material';
+import { SELECTED_TYPE } from '../utils/consts';
 
 const TypeBar = observer(() => {
   const { device } = useContext(Context);
@@ -20,25 +21,26 @@ const TypeBar = observer(() => {
           borderRadius: '10px',
         }}
       >
-        {device._types.map((type, key) => (
-          <ListItem
-            sx={{
-              borderBottom:
-                key !== device._types.length - 1 &&
-                '1px solid rgba(128, 128, 128, 0.5)',
-            }}
-            disablePadding
-            key={type.id}
-          >
-            <ListItemButton
-              style={{ cursor: 'pointer' }}
-              selected={type.id === device._selectedType.id}
-              onClick={() => device.setSelectedType(type)}
+        {device._types?.rows &&
+          device._types.rows.map((type, key) => (
+            <ListItem
+              sx={{
+                borderBottom:
+                  key !== device._types.length - 1 &&
+                  '1px solid rgba(128, 128, 128, 0.5)',
+              }}
+              disablePadding
+              key={type.id}
             >
-              <ListItemText primary={type.name} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+              <ListItemButton
+                style={{ cursor: 'pointer' }}
+                selected={type.id === device._selectedType.id}
+                onClick={() => device.setStoreItems(SELECTED_TYPE, type)}
+              >
+                <ListItemText primary={type.name} />
+              </ListItemButton>
+            </ListItem>
+          ))}
       </List>
     </Box>
   );

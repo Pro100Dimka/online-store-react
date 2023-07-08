@@ -14,10 +14,14 @@ export const registration = async (email, password, name, surname, phone) => {
   return jwt_decode(data.token);
 };
 
-export const login = async (email, password) => {
+export const login = async (email, password, name, surname, phone, role) => {
   const { data } = await $host.post('api/user/login', {
     email,
+    role,
     password,
+    phone,
+    name,
+    surname,
   });
   localStorage.setItem('token', data.token);
   return jwt_decode(data.token);
