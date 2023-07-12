@@ -15,10 +15,14 @@ import initialValues from '../../AdminPanel/Modal/formik/initialValues';
 import Schema from '../../AdminPanel/Modal/formik/Schema';
 import { DEVICE_ROUTE } from '../../../../utils/consts';
 
-function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID }) {
+function CreateDevice({
+  isOpenDeviceModal,
+  setIsOpenDeviceModal,
+  deviceID,
+  tableRef,
+}) {
   const apiDevice = new ApiService(DEVICE_ROUTE);
   const { device } = useContext(Context);
-  const [file, setFile] = useState([]);
   const [info, setInfo] = useState([]);
   const addInfo = () => {
     setInfo([...info, { title: '', description: '', number: Date.now() }]);
@@ -30,25 +34,75 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID }) {
   const apiTypes = new ApiService(DEVICE_ROUTE);
   const { enqueueSnackbar } = useSnackbar();
   const onSubmit = (values) => {
-    submit(values, apiTypes, enqueueSnackbar, setIsOpenDeviceModal);
+    submit(values, apiTypes, enqueueSnackbar, setIsOpenDeviceModal, tableRef);
   };
   const formik = NewFormikObject(initialValues, Schema(), onSubmit);
   const { handleSubmit, setFieldValue, values, setValues } = formik;
+  const fetchFileInfo = async (url) => {
+    try {
+      const response = await fetch(url);
+      const blob = await response.blob();
+
+      const file = new File([blob], url.substring(url.lastIndexOf('/') + 1), {
+        type: blob.type,
+        lastModified: blob.lastModified,
+      });
+
+      const fileInfo = {
+        path: file.name,
+        lastModified: file.lastModified,
+        lastModifiedDate: file.lastModifiedDate,
+        name: file.name,
+        size: file.size,
+        type: file.type,
+      };
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        fileInfo.preview = reader.result;
+      };
+      reader.readAsDataURL(file);
+
+      return fileInfo;
+    } catch (error) {
+      console.error('Error fetching file info:', error);
+      return null;
+    }
+  };
+
   useEffect(() => {
     if (deviceID) {
       apiDevice.getItemById(deviceID).then((response) => {
+        console.log(response);
         Object.keys(response).forEach((key) => {
           setFieldValue(key, response[key]);
         });
+        fetchFileInfo(`${process.env.REACT_APP_API_URL}/${response.img}`)
+          .then((fileInfo) => {
+            if (fileInfo) {
+              const photoObj = {
+                ...fileInfo,
+                name: response.img,
+                path: `${process.env.REACT_APP_API_URL}/${response.img}`,
+              };
+              console.log(photoObj);
+              setFieldValue('img', [
+                Object.assign(photoObj, {
+                  preview: `${process.env.REACT_APP_API_URL}/${response.img}`,
+                }),
+              ]);
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching file info:', error);
+          });
       });
     }
   }, [deviceID]);
+  console.log(values);
   useEffect(() => {
     if (isOpenDeviceModal) setValues(initialValues);
   }, [isOpenDeviceModal]);
-
-  console.log(file);
-  console.log(values);
   return (
     <CustomModal
       isOpenBrandModal={isOpenDeviceModal}
@@ -76,8 +130,9 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID }) {
               sx={{ display: 'flex', alignItems: 'center', height: 285 }}
             >
               <Dropzone
-                accept="image/*"
-                files={file}
+                files={
+                  typeof values.img === 'string' ? [values.img] : values.img
+                }
                 sx={{
                   height: '100%',
                   bgcolor: 'lightgray',
@@ -88,30 +143,33 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID }) {
                   flexDirection: 'column',
                 }}
                 onDrop={(acceptedFiles) => {
-                  setFile(
-                    acceptedFiles.map((files) =>
-                      Object.assign(files, {
-                        preview: URL.createObjectURL(files),
+                  setFieldValue(
+                    'img',
+                    acceptedFiles.map((file) =>
+                      Object.assign(file, {
+                        preview: URL.createObjectURL(file),
                       })
                     )
                   );
                 }}
-                onRemove={() => setFile([])}
+                onRemove={() => setFieldValue('img', [])}
               />
             </Grid>
             <Grid item md={7}>
               <Grid container spacing={2}>
-                <GridSelect
-                  md={12}
-                  labelParagraph="Оберіть тип"
-                  field="typeId"
-                  formik={formik}
-                  option={device._types.map((type) => (
-                    <MenuItem key={type.id} value={type.id}>
-                      {type.name}
-                    </MenuItem>
-                  ))}
-                />
+                {device._types?.rows && (
+                  <GridSelect
+                    md={12}
+                    labelParagraph="Оберіть тип"
+                    field="typeId"
+                    formik={formik}
+                    option={device._types?.rows.map((type) => (
+                      <MenuItem key={type.id} value={type.id}>
+                        {type.name}
+                      </MenuItem>
+                    ))}
+                  />
+                )}
                 {device._brands?.rows && (
                   <GridSelect
                     md={12}

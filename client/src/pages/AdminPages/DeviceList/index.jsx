@@ -2,13 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import PageTitle from '../../../components/Page/PageTitle';
 import { Container, Card, Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
-// import DeleteIcon from '@mui/icons-material/Delete';
+import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import ApiService from '../../../components/apiHelper/apiDevice';
 import { DEVICE_ROUTE } from '../../../utils/consts';
 import { getTableDefault } from '../../../components/MaterialTable/table-helper';
 import Table from '../../../components/MaterialTable';
 import CreateDevice from './Modal';
+import { enqueueSnackbar } from 'notistack';
 
 function DeviceList() {
   const tableRef = useRef();
@@ -19,8 +20,8 @@ function DeviceList() {
     return deviceApi.getAllItems().then((responce) => {
       return {
         data: responce.rows,
-        page: 1,
-        pageSize: 5,
+        page: 0,
+        pageSize: 15,
         totalCount: responce.count,
       };
     });
@@ -32,11 +33,29 @@ function DeviceList() {
     setDeviceID(rowData.id);
     setIsOpenDeviceModal(true);
   };
-
+  const action = {
+    onRowDelete: (oldData) =>
+      new Promise((resolve, reject) => {
+        deviceApi
+          .deleteItem(oldData.id)
+          .then(() => {
+            tableRef.current.onQueryChange();
+            enqueueSnackbar(`Елемент ${oldData.name} успішно видалено`, {
+              variant: 'success',
+            });
+            resolve();
+          })
+          .catch((error) => {
+            enqueueSnackbar(error.response.data.message, { variant: 'error' });
+            reject();
+          });
+      }),
+  };
   return (
     <Container style={{ maxWidth: '1850px' }}>
       <PageTitle text="Пристрої" isReturnButton />
       <CreateDevice
+        tableRef={tableRef}
         deviceID={deviceID}
         setDeviceID={setDeviceID}
         isOpenDeviceModal={isOpenDeviceModal}
@@ -46,6 +65,9 @@ function DeviceList() {
         <Table
           tableRef={tableRef}
           {...getTableDefault()}
+          icons={{
+            Delete: () => <DeleteIcon />,
+          }}
           columns={[
             {
               title: 'Зображення',
@@ -81,6 +103,7 @@ function DeviceList() {
               width: '10%',
             },
           ]}
+          editable={action}
           headerButtons={[
             <Button
               variant="contained"

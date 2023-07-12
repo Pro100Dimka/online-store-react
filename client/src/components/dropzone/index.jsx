@@ -35,6 +35,7 @@ export default function Dropzone({ error, files, onRemove, sx, ...other }) {
     useDropzone({
       ...other,
     });
+
   return (
     <Box sx={{ width: '100%', ...sx }}>
       <DropZoneStyle
@@ -85,6 +86,7 @@ export default function Dropzone({ error, files, onRemove, sx, ...other }) {
           {files.map((file) => {
             const { name, preview } = file;
             const key = isString(file) ? file : name;
+            console.log(file);
             return (
               <ListItem
                 key={key}
@@ -102,7 +104,11 @@ export default function Dropzone({ error, files, onRemove, sx, ...other }) {
                 <Paper
                   variant="outlined"
                   component="img"
-                  src={isString(file) ? file : preview}
+                  src={
+                    isString(file)
+                      ? `${process.env.REACT_APP_API_URL}/${file}`
+                      : preview
+                  }
                   sx={{
                     width: '100%',
                     height: '100%',
