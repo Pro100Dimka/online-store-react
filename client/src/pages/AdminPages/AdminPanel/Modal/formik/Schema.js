@@ -18,11 +18,12 @@ const Schema = (typeForm) => {
         return schema.shape({
           typeId: Yup.number()
             .required('Поле обов`язкове')
-            .oneOf(device._types),
+            .oneOf(device._types.concat([null])),
           brandId: Yup.number()
+            .nullable()
             .required('Поле обов`язкове')
-            .oneOf(device._brands),
-          price: Yup.number(),
+            .oneOf(device._brands.concat([null])),
+          price: Yup.number().nullable(),
         });
       }
       return schema.shape({});

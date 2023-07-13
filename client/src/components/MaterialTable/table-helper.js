@@ -8,7 +8,7 @@ export const getTableDefault = (additionalOptions) => {
       emptyRowsWhenPaging: false,
       actionsColumnIndex: -1,
       selection: false,
-      sorting: false,
+      maxColumnSort: 3,
       headerStyle: {
         borderRadius: 0,
         color: 'white',
@@ -40,7 +40,6 @@ export const getTableDefault = (additionalOptions) => {
       },
       pagination: {
         labelRowsPerPage: '',
-        labelRowsSelect: ' на сторінці',
         labelDisplayedRows: `{from}-{to} з {count}`,
         firstAriaLabel: 'Перша сторінка',
         firstTooltip: 'Перша сторінка',

@@ -14,6 +14,7 @@ import NewFormikObject from '../../../../components/getFormik';
 import initialValues from '../../AdminPanel/Modal/formik/initialValues';
 import Schema from '../../AdminPanel/Modal/formik/Schema';
 import { DEVICE_ROUTE } from '../../../../utils/consts';
+import fetchFileInfo from '../../../../components/apiHelper/fetchFile';
 
 function CreateDevice({
   isOpenDeviceModal,
@@ -38,59 +39,23 @@ function CreateDevice({
   };
   const formik = NewFormikObject(initialValues, Schema(), onSubmit);
   const { handleSubmit, setFieldValue, values, setValues } = formik;
-  const fetchFileInfo = async (url) => {
-    try {
-      const response = await fetch(url);
-      const blob = await response.blob();
-
-      const file = new File([blob], url.substring(url.lastIndexOf('/') + 1), {
-        type: blob.type,
-        lastModified: blob.lastModified,
-      });
-
-      const fileInfo = {
-        path: file.name,
-        lastModified: file.lastModified,
-        lastModifiedDate: file.lastModifiedDate,
-        name: file.name,
-        size: file.size,
-        type: file.type,
-      };
-
-      const reader = new FileReader();
-      reader.onload = () => {
-        fileInfo.preview = reader.result;
-      };
-      reader.readAsDataURL(file);
-
-      return fileInfo;
-    } catch (error) {
-      console.error('Error fetching file info:', error);
-      return null;
-    }
-  };
-
   useEffect(() => {
     if (deviceID) {
       apiDevice.getItemById(deviceID).then((response) => {
-        console.log(response);
         Object.keys(response).forEach((key) => {
-          setFieldValue(key, response[key]);
+          setFieldValue(key, key === 'img' ? [response[key]] : response[key]);
         });
         fetchFileInfo(`${process.env.REACT_APP_API_URL}/${response.img}`)
-          .then((fileInfo) => {
-            if (fileInfo) {
-              const photoObj = {
-                ...fileInfo,
-                name: response.img,
-                path: `${process.env.REACT_APP_API_URL}/${response.img}`,
-              };
-              console.log(photoObj);
-              setFieldValue('img', [
-                Object.assign(photoObj, {
-                  preview: `${process.env.REACT_APP_API_URL}/${response.img}`,
-                }),
-              ]);
+          .then((files) => {
+            if (files) {
+              setFieldValue(
+                'img',
+                files.map((file) =>
+                  Object.assign(file, {
+                    preview: URL.createObjectURL(file),
+                  })
+                )
+              );
             }
           })
           .catch((error) => {
@@ -99,10 +64,10 @@ function CreateDevice({
       });
     }
   }, [deviceID]);
-  console.log(values);
   useEffect(() => {
     if (isOpenDeviceModal) setValues(initialValues);
   }, [isOpenDeviceModal]);
+
   return (
     <CustomModal
       isOpenBrandModal={isOpenDeviceModal}
@@ -130,9 +95,7 @@ function CreateDevice({
               sx={{ display: 'flex', alignItems: 'center', height: 285 }}
             >
               <Dropzone
-                files={
-                  typeof values.img === 'string' ? [values.img] : values.img
-                }
+                files={values.img}
                 sx={{
                   height: '100%',
                   bgcolor: 'lightgray',

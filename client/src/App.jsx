@@ -30,7 +30,8 @@ const App = observer(() => {
         device.setStoreItems(DEVICE_ROUTE, devices);
       })
       .catch((error) => {
-        enqueueSnackbar(error.response.data.message, { variant: 'error' });
+        const err = error.response?.data?.message || error;
+        enqueueSnackbar(err, { variant: 'error' });
       });
   }, []);
   useEffect(() => {

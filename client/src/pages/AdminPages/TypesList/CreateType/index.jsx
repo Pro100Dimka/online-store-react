@@ -22,7 +22,6 @@ function CreateType({ isOpenTypeModal, setIsOpenTypeModal, tableRef, typeID }) {
   useEffect(() => {
     if (typeID) {
       apiTypes.getItemById(typeID).then((response) => {
-        console.log(response);
         Object.keys(response).forEach((key) => {
           setFieldValue(key, response[key]);
         });

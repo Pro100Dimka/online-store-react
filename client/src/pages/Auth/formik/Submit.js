@@ -10,7 +10,6 @@ const submit = async (values, isLogin, enqueueSnackbar, user, navigate) => {
         user.setUser(response);
       })
       .catch((error) => {
-        console.log(error);
         enqueueSnackbar(error.response.data.message, { variant: 'error' });
       })
       .finally(() => navigate(SHOP_ROUTE));

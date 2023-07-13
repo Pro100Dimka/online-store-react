@@ -3,6 +3,7 @@ const path = require('path');
 const uuid = require('uuid'); //рандомные идишники
 const apiErrors = require('../errors/api');
 const fs = require('fs');
+const { sequelize, literal } = require('sequelize');
 
 class deviceController {
   async create(req, res, next) {
@@ -30,7 +31,7 @@ class deviceController {
       }
       return res.json(device);
     } catch (error) {
-      next(apiErrors.badRequest(error.message));
+      next(apiErrors.badRequest('Елемент з такою назвою вже існує'));
     }
   }
   async updateItemById(req, res, next) {
@@ -86,40 +87,53 @@ class deviceController {
     }
   }
   async getAllItems(req, res) {
-    let { brandId, typeId, limit, page } = req.query;
+    let { brandId, typeId, limit, page, sortField, sortOrder } = req.query;
     page = page || 1;
-    limit = limit || 100;
+    limit = limit || 10;
     let offset = page * limit - limit;
     let devices;
+    let order = [];
+    console.log(sortOrder);
+    if (sortField && sortOrder) {
+      if (
+        sortField === 'price' ||
+        sortField === 'typeId' ||
+        sortField === 'brandId' ||
+        sortField === 'rating'
+      ) {
+        order.push([
+          literal('CAST(price AS INTEGER)'),
+          sortOrder.toUpperCase(),
+        ]);
+      } else if (sortField === 'name') {
+        order.push([literal('LOWER(name)'), sortOrder.toUpperCase()]);
+      }
+      // Добавьте обработку других полей здесь, если необходимо
+    }
     if (!brandId && !typeId)
-      devices = await Device.findAndCountAll({ limit, offset });
+      devices = await Device.findAndCountAll({ limit, offset, order });
     if (brandId && !typeId)
       devices = await Device.findAndCountAll({
         where: { brandId },
         limit,
         offset,
+        order,
       });
     if (!brandId && typeId)
       devices = await Device.findAndCountAll({
         where: { typeId },
         limit,
         offset,
+        order,
       });
     if (brandId && typeId)
       devices = await Device.findAndCountAll({
         where: { typeId, brandId },
         limit,
         offset,
+        order,
       });
     return res.json(devices);
-  }
-  async getItemById(req, res) {
-    const { id } = req.params;
-    const device = await Device.findOne({
-      where: { id },
-      include: [{ model: DeviceInfo, as: 'info' }],
-    });
-    return res.json(device);
   }
   async deleteItemById(req, res, next) {
     try {
@@ -148,41 +162,14 @@ class deviceController {
       next(apiErrors.badRequest(error.message));
     }
   }
+  async getItemById(req, res) {
+    const { id } = req.params;
+    const device = await Device.findOne({
+      where: { id },
+      include: [{ model: DeviceInfo, as: 'info' }],
+    });
+
+    return res.json(device);
+  }
 }
 module.exports = new deviceController();
-
-// async getItemById(req, res,next) {
-//   const { id } = req.params;
-//   const device = await Device.findOne({
-//     where: { id },
-//     include: [{ model: DeviceInfo, as: 'info' }],
-//   });
-//   if (!device) {
-//     return next(apiErrors.badRequest('Пристрій не знайдено'));
-//   }
-//   // Путь к файлу изображения
-//   const imagePath = path.resolve(__dirname, '..', 'static', device.img);
-//   try {
-//     // Чтение файла изображения в виде буфера
-//     const imageBuffer = await readFileAsync(imagePath);
-
-//     // Создание объекта с необходимыми свойствами
-//     const imageObject = {
-//       lastModified: Date.now(), // Здесь можно указать необходимое значение
-//       lastModifiedDate: new Date(),
-//       name: device.img,
-//       path: `${process.env.REACT_APP_API_URL}/${device.img}`,
-//       preview: `${process.env.REACT_APP_API_URL}/${device.img}`,
-//       size: imageBuffer.length,
-//       type: 'image/jpeg', // Здесь можно указать соответствующий тип контента
-//     };
-
-//     // Добавление объекта изображения в свойство img
-//     device.img = imageObject;
-
-//     return res.json(device);
-//   } catch (error) {
-//     console.error('Error reading image file:', error);
-//     return next(apiErrors.badRequest(error.message));
-//   }
-// }

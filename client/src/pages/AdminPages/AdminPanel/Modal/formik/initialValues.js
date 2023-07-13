@@ -1,8 +1,8 @@
 const initialValues = {
   id: null,
   name: '',
-  typeId: null,
-  brandId: null,
+  typeId: '',
+  brandId: '',
   price: '',
   img: [],
 };

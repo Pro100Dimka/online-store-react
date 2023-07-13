@@ -86,7 +86,6 @@ export default function Dropzone({ error, files, onRemove, sx, ...other }) {
           {files.map((file) => {
             const { name, preview } = file;
             const key = isString(file) ? file : name;
-            console.log(file);
             return (
               <ListItem
                 key={key}

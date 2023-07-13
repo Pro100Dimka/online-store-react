@@ -16,12 +16,19 @@ function DeviceList() {
   const deviceApi = new ApiService(DEVICE_ROUTE);
   const [isOpenDeviceModal, setIsOpenDeviceModal] = useState(false);
   const [deviceID, setDeviceID] = useState(null);
-  const getData = () => {
-    return deviceApi.getAllItems().then((responce) => {
+  const getData = (query) => {
+    const queryObj = {
+      sortOrder: query?.orderDirection || 'asc',
+      sortField: query.orderBy?.field || 'id',
+      limit: query.pageSize,
+      page: query.page + 1,
+    };
+
+    return deviceApi.getAllItems(queryObj).then((responce) => {
       return {
         data: responce.rows,
-        page: 0,
-        pageSize: 15,
+        page: query.page,
+        pageSize: query.pageSize,
         totalCount: responce.count,
       };
     });
@@ -78,6 +85,7 @@ function DeviceList() {
                   src={`${process.env.REACT_APP_API_URL}/${rowData.img}`}
                   width={'100%'}
                   alt={rowData.name}
+                  style={{ maxHeight: '347px', maxWidth: '347px' }}
                 />
               ),
             },
