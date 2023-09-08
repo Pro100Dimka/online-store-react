@@ -1,13 +1,7 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
+import { Box, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Context } from '../index';
-import {
-  Box,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from '@mui/material';
 import { SELECTED_TYPE } from '../utils/consts';
 
 const TypeBar = observer(() => {
@@ -18,7 +12,7 @@ const TypeBar = observer(() => {
         variant="outlined"
         sx={{
           border: '1px solid rgba(128, 128, 128, 0.5)',
-          borderRadius: '10px',
+          borderRadius: '10px'
         }}
       >
         {device._types?.rows &&
@@ -26,8 +20,7 @@ const TypeBar = observer(() => {
             <ListItem
               sx={{
                 borderBottom:
-                  key !== device._types.length - 1 &&
-                  '1px solid rgba(128, 128, 128, 0.5)',
+                  key !== device._types.length - 1 && '1px solid rgba(128, 128, 128, 0.5)'
               }}
               disablePadding
               key={type.id}

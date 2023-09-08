@@ -2,22 +2,17 @@ import React, { useEffect } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { Button } from 'react-bootstrap';
 import { Form, FormikProvider } from 'formik';
+import { useSnackbar } from 'notistack';
 import GridTextField from '../../../../components/fields/GridTextField';
 import CustomModal from '../../../../components/CustModal';
 import ApiService from '../../../../components/apiHelper/apiDevice';
-import { useSnackbar } from 'notistack';
 import submit from '../../AdminPanel/Modal/formik/Submit';
 import NewFormikObject from '../../../../components/getFormik';
 import initialValues from '../../AdminPanel/Modal/formik/initialValues';
 import Schema from '../../AdminPanel/Modal/formik/Schema';
 import { BRAND_ROUTE } from '../../../../utils/consts';
 
-function CreateBrand({
-  isOpenBrandModal,
-  setIsOpenBrandModal,
-  tableRef,
-  brandID,
-}) {
+function CreateBrand({ isOpenBrandModal, setIsOpenBrandModal, tableRef, brandID }) {
   const apiBrand = new ApiService(BRAND_ROUTE);
   const labelId = 'add-new-brand';
   const { enqueueSnackbar } = useSnackbar();
@@ -53,7 +48,7 @@ function CreateBrand({
           style={{
             display: 'flex',
             flexDirection: 'column',
-            marginTop: '10px',
+            marginTop: '10px'
           }}
         >
           <Typography id={labelId} variant="h6" component="h2">
@@ -77,7 +72,7 @@ function CreateBrand({
                 display: 'flex',
                 justifyContent: 'flex-end',
                 gap: '7px',
-                marginTop: '10px',
+                marginTop: '10px'
               }}
             >
               <Button

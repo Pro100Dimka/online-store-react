@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { Grid, Typography } from '@mui/material';
 import { Button } from 'react-bootstrap';
+import { Form, FormikProvider } from 'formik';
+import { useSnackbar } from 'notistack';
 import CustomModal from '../../../../components/CustModal';
 import initialValues from '../../AdminPanel/Modal/formik/initialValues';
 import submit from '../../AdminPanel/Modal/formik/Submit';
 import Schema from '../../AdminPanel/Modal/formik/Schema';
 import NewFormikObject from '../../../../components/getFormik';
-import { Form, FormikProvider } from 'formik';
 import GridTextField from '../../../../components/fields/GridTextField';
 import { TYPE_ROUTE } from '../../../../utils/consts';
 import ApiService from '../../../../components/apiHelper/apiDevice';
-import { useSnackbar } from 'notistack';
 
 function CreateType({ isOpenTypeModal, setIsOpenTypeModal, tableRef, typeID }) {
   const apiTypes = new ApiService(TYPE_ROUTE);
@@ -47,15 +47,10 @@ function CreateType({ isOpenTypeModal, setIsOpenTypeModal, tableRef, typeID }) {
           style={{
             display: 'flex',
             flexDirection: 'column',
-            marginTop: '10px',
+            marginTop: '10px'
           }}
         >
-          <Typography
-            id={labelId}
-            variant="h4"
-            component="h2"
-            textAlign="center"
-          >
+          <Typography id={labelId} variant="h4" component="h2" textAlign="center">
             Додати новий тип
           </Typography>
           <Grid container spacing={2} sx={{ marginTop: '10px' }}>
@@ -76,13 +71,10 @@ function CreateType({ isOpenTypeModal, setIsOpenTypeModal, tableRef, typeID }) {
                 display: 'flex',
                 justifyContent: 'flex-end',
                 gap: '7px',
-                marginTop: '10px',
+                marginTop: '10px'
               }}
             >
-              <Button
-                variant="outline-danger"
-                onClick={() => setIsOpenTypeModal(!isOpenTypeModal)}
-              >
+              <Button variant="outline-danger" onClick={() => setIsOpenTypeModal(!isOpenTypeModal)}>
                 Закрити
               </Button>
               <Button variant="outline-success" type="submit">

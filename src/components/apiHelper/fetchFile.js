@@ -4,7 +4,7 @@ const fetchFileInfo = async (url) => {
     const blob = await response.blob();
     const file = new File([blob], url.substring(url.lastIndexOf('/') + 1), {
       type: blob.type,
-      lastModified: blob.lastModified,
+      lastModified: blob.lastModified
     });
     return [file];
   } catch (error) {

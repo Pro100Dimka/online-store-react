@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Typography, Grid, MenuItem } from '@mui/material';
 import { Button } from 'react-bootstrap';
+import { Form, FormikProvider } from 'formik';
+import { useSnackbar } from 'notistack';
 import { Context } from '../../../..';
 import Dropzone from '../../../../components/dropzone';
 import CustomModal from '../../../../components/CustModal';
-import { Form, FormikProvider } from 'formik';
 import GridTextField from '../../../../components/fields/GridTextField';
 import GridSelect from '../../../../components/fields/GridSelect';
 import ApiService from '../../../../components/apiHelper/apiDevice';
-import { useSnackbar } from 'notistack';
 import submit from '../../AdminPanel/Modal/formik/Submit';
 import NewFormikObject from '../../../../components/getFormik';
 import initialValues from '../../AdminPanel/Modal/formik/initialValues';
@@ -16,12 +16,7 @@ import Schema from '../../AdminPanel/Modal/formik/Schema';
 import { DEVICE_ROUTE } from '../../../../utils/consts';
 import fetchFileInfo from '../../../../components/apiHelper/fetchFile';
 
-function CreateDevice({
-  isOpenDeviceModal,
-  setIsOpenDeviceModal,
-  deviceID,
-  tableRef,
-}) {
+function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, tableRef }) {
   const apiDevice = new ApiService(DEVICE_ROUTE);
   const { device } = useContext(Context);
   const [info, setInfo] = useState([]);
@@ -52,7 +47,7 @@ function CreateDevice({
                 'img',
                 files.map((file) =>
                   Object.assign(file, {
-                    preview: URL.createObjectURL(file),
+                    preview: URL.createObjectURL(file)
                   })
                 )
               );
@@ -82,18 +77,14 @@ function CreateDevice({
           style={{
             display: 'flex',
             flexDirection: 'column',
-            marginTop: '10px',
+            marginTop: '10px'
           }}
         >
           <Typography id={labelId} variant="h6" component="h2">
             Додати новий пристрій
           </Typography>
           <Grid container spacing={2}>
-            <Grid
-              item
-              md={5}
-              sx={{ display: 'flex', alignItems: 'center', height: 285 }}
-            >
+            <Grid item md={5} sx={{ display: 'flex', alignItems: 'center', height: 285 }}>
               <Dropzone
                 files={values.img}
                 sx={{
@@ -103,14 +94,14 @@ function CreateDevice({
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  flexDirection: 'column',
+                  flexDirection: 'column'
                 }}
                 onDrop={(acceptedFiles) => {
                   setFieldValue(
                     'img',
                     acceptedFiles.map((file) =>
                       Object.assign(file, {
-                        preview: URL.createObjectURL(file),
+                        preview: URL.createObjectURL(file)
                       })
                     )
                   );
@@ -190,10 +181,7 @@ function CreateDevice({
                   />
                 </Grid>
                 <Grid key={key + 2} item md={4}>
-                  <Button
-                    variant={'outline-danger'}
-                    onClick={() => removeInfo(i.number)}
-                  >
+                  <Button variant="outline-danger" onClick={() => removeInfo(i.number)}>
                     Видалити
                   </Button>
                 </Grid>{' '}
@@ -205,7 +193,7 @@ function CreateDevice({
               display: 'flex',
               justifyContent: 'flex-end',
               gap: '7px',
-              marginTop: '20px',
+              marginTop: '20px'
             }}
           >
             <Button

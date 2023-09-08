@@ -4,8 +4,9 @@ import {
   DEVICE_ROUTE,
   SELECTED_BRAND,
   SELECTED_TYPE,
-  TYPE_ROUTE,
+  TYPE_ROUTE
 } from '../utils/consts';
+
 export default class DeviceStore {
   constructor() {
     this._types = [];
@@ -15,6 +16,7 @@ export default class DeviceStore {
     this._selectedBrand = {};
     makeAutoObservable(this); // при изминениях в переменных выше мобх будет отслеживать и отрендривать заново
   }
+
   setStoreItems(type, items) {
     switch (type) {
       case TYPE_ROUTE:
@@ -36,6 +38,7 @@ export default class DeviceStore {
         break;
     }
   }
+
   getStoreItems(type) {
     switch (type) {
       case TYPE_ROUTE:
@@ -49,7 +52,7 @@ export default class DeviceStore {
       case SELECTED_BRAND:
         return this._selectedBrand;
       default:
-        return;
+        return null;
     }
   }
 }

@@ -8,28 +8,23 @@ import {
   Menu,
   Container,
   Button,
-  MenuItem,
+  MenuItem
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
-import {
-  ADMIN_ROUTE,
-  LOGIN_ROUTE,
-  REGISTRATION_ROUTE,
-  SHOP_ROUTE,
-} from '../utils/consts';
 import { observer } from 'mobx-react-lite';
-import { Context } from '..';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
+import { Context } from '..';
+import { ADMIN_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE, SHOP_ROUTE } from '../utils/consts';
 
 const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#1976d2',
-    },
-  },
+      main: '#1976d2'
+    }
+  }
 });
 const NavBar = observer(() => {
   const navigate = useNavigate();
@@ -67,7 +62,7 @@ const NavBar = observer(() => {
                 letterSpacing: '.3rem',
                 color: 'inherit',
                 textDecoration: 'none',
-                flexGrow: 1,
+                flexGrow: 1
               }}
             >
               Зайца Магазин
@@ -88,27 +83,27 @@ const NavBar = observer(() => {
                 anchorEl={anchorElNav}
                 anchorOrigin={{
                   vertical: 'bottom',
-                  horizontal: 'left',
+                  horizontal: 'left'
                 }}
                 keepMounted
                 transformOrigin={{
                   vertical: 'top',
-                  horizontal: 'left',
+                  horizontal: 'left'
                 }}
                 open={Boolean(anchorElNav)}
                 onClose={handleCloseNavMenu}
                 sx={{
-                  display: { xs: 'block', md: 'none' },
+                  display: { xs: 'block', md: 'none' }
                 }}
               >
                 {user._isAuth ? (
                   [
-                    <MenuItem key={'admin'} onClick={handleCloseNavMenu}>
+                    <MenuItem key="admin" onClick={handleCloseNavMenu}>
                       <Typography textAlign="center">Адмін Панель</Typography>
                     </MenuItem>,
-                    <MenuItem key={'logOut'} onClick={handleCloseNavMenu}>
+                    <MenuItem key="logOut" onClick={handleCloseNavMenu}>
                       <Typography textAlign="center">Вийти</Typography>
-                    </MenuItem>,
+                    </MenuItem>
                   ]
                 ) : (
                   <MenuItem
@@ -136,7 +131,7 @@ const NavBar = observer(() => {
                 fontWeight: 700,
                 letterSpacing: '.3rem',
                 color: 'inherit',
-                textDecoration: 'none',
+                textDecoration: 'none'
               }}
             >
               Зайца Магазин

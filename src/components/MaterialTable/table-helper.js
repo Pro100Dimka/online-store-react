@@ -13,14 +13,14 @@ export const getTableDefault = (additionalOptions) => {
         borderRadius: 0,
         color: 'white',
         background: 'black',
-        fontWeight: '600',
+        fontWeight: '600'
       },
       rowStyle: {
         lineHeight: '1.5',
         fontSize: '0.865rem',
-        fontWeight: '400',
+        fontWeight: '400'
       },
-      ...additionalOptions,
+      ...additionalOptions
     },
     localization: {
       body: {
@@ -28,15 +28,15 @@ export const getTableDefault = (additionalOptions) => {
         editRow: {
           deleteText: 'Хочете видилити?',
           saveTooltip: 'Підтвердити',
-          cancelTooltip: 'Відміна',
+          cancelTooltip: 'Відміна'
         },
         addTooltip: 'Додати',
         deleteTooltip: 'Прибрати',
-        editTooltip: 'Змінити',
+        editTooltip: 'Змінити'
       },
       toolbar: {
         searchPlaceholder: 'Пошук',
-        searchTooltip: 'Пошук',
+        searchTooltip: 'Пошук'
       },
       pagination: {
         labelRowsPerPage: '',
@@ -48,11 +48,11 @@ export const getTableDefault = (additionalOptions) => {
         nextAriaLabel: 'Наступна сторінка',
         nextTooltip: 'Наступна сторінка',
         lastAriaLabel: 'Остання сторінка',
-        lastTooltip: 'Остання сторінка',
+        lastTooltip: 'Остання сторінка'
       },
       header: {
-        actions: 'Дії',
-      },
-    },
+        actions: 'Дії'
+      }
+    }
   };
 };

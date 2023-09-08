@@ -9,40 +9,36 @@ function PageTitle({ text, isReturnButton, isEdit, editFunc, textAlign }) {
   const theme = useTheme();
   const navigate = useNavigate();
   return (
-    <>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent={!textAlign ? 'space-between' : textAlign}
-        mb={5}
-        ml={1}
-      >
-        <Typography variant="h4" gutterBottom sx={{ width: '90%' }}>
-          {text}
-          {isEdit && (
-            <IconButton onClick={editFunc}>
-              <EditIcon
-                style={{ color: theme.palette.primary.main, cursor: 'pointer' }}
-              />
-            </IconButton>
-          )}
-        </Typography>
-
-        {isReturnButton && (
-          <Button
-            size="medium"
-            className="mt-3 mr-3"
-            sx={{
-              marginRight: '0px',
-            }}
-            variant="DiiaButtonSave"
-            onClick={() => navigate(-1)}
-          >
-            Повернутись
-          </Button>
+    <Stack
+      direction="row"
+      alignItems="center"
+      justifyContent={!textAlign ? 'space-between' : textAlign}
+      mb={5}
+      ml={1}
+    >
+      <Typography variant="h4" gutterBottom sx={{ width: '90%' }}>
+        {text}
+        {isEdit && (
+          <IconButton onClick={editFunc}>
+            <EditIcon style={{ color: theme.palette.primary.main, cursor: 'pointer' }} />
+          </IconButton>
         )}
-      </Stack>
-    </>
+      </Typography>
+
+      {isReturnButton && (
+        <Button
+          size="medium"
+          className="mt-3 mr-3"
+          sx={{
+            marginRight: '0px'
+          }}
+          variant="DiiaButtonSave"
+          onClick={() => navigate(-1)}
+        >
+          Повернутись
+        </Button>
+      )}
+    </Stack>
   );
 }
 

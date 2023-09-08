@@ -1,10 +1,4 @@
-const submit = async (
-  values,
-  apiService,
-  enqueueSnackbar,
-  closeModal,
-  tableRef
-) => {
+const submit = async (values, apiService, enqueueSnackbar, closeModal, tableRef) => {
   if (values.id) {
     let data;
     if (values.img) {

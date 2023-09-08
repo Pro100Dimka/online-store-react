@@ -1,13 +1,13 @@
 import { BrowserRouter } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import { useContext, useEffect, useState } from 'react';
+import { enqueueSnackbar } from 'notistack';
 import AppRouter from './components/router';
 import NavBar from './components/NavBar';
-import { observer } from 'mobx-react-lite';
 import { Context } from './index';
-import { useContext, useEffect, useState } from 'react';
 import { checkLogin } from './components/apiHelper/userApi';
 import ApiService from './components/apiHelper/apiDevice';
 import { BRAND_ROUTE, DEVICE_ROUTE, TYPE_ROUTE } from './utils/consts';
-import { enqueueSnackbar } from 'notistack';
 
 const App = observer(() => {
   const { user } = useContext(Context);
@@ -18,11 +18,7 @@ const App = observer(() => {
   const apiDevice = new ApiService(DEVICE_ROUTE);
 
   useEffect(() => {
-    const promises = [
-      apiTypes.getAllItems(),
-      apiBrands.getAllItems(),
-      apiDevice.getAllItems(),
-    ];
+    const promises = [apiTypes.getAllItems(), apiBrands.getAllItems(), apiDevice.getAllItems()];
     Promise.all(promises)
       .then(([types, brands, devices]) => {
         device.setStoreItems(TYPE_ROUTE, types);
@@ -40,7 +36,7 @@ const App = observer(() => {
         user.setUser(response);
         user.setIsAuth(true);
       })
-      .catch((_error) => {
+      .catch(() => {
         if (localStorage.getItem('token')) localStorage.removeItem('token');
       })
       .finally(() => setIsLoading(false));

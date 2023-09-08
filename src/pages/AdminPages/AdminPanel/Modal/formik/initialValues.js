@@ -4,6 +4,6 @@ const initialValues = {
   typeId: '',
   brandId: '',
   price: '',
-  img: [],
+  img: []
 };
 export default initialValues;

@@ -20,5 +20,5 @@ export const classesTable = {
   actions: `${PREFIX}-actions`,
   title: `${PREFIX}-title`,
   searchField: `${PREFIX}-searchField`,
-  formControlLabel: `${PREFIX}-formControlLabel`,
+  formControlLabel: `${PREFIX}-formControlLabel`
 };

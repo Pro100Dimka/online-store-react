@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
 import { Container, Card, Button } from 'react-bootstrap';
 import { useSnackbar } from 'notistack';
-import { REGISTRATION_ROUTE, LOGIN_ROUTE } from '../../utils/consts';
 import { Grid, Link, Typography } from '@mui/material';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Form, FormikProvider } from 'formik';
+import { REGISTRATION_ROUTE, LOGIN_ROUTE } from '../../utils/consts';
 import NewFormikObject from '../../components/getFormik';
 import initialValues from './formik/initialValues';
 import Schema from './formik/schema';
 import submit from './formik/Submit';
-import { Form, FormikProvider } from 'formik';
 import GridTextField from '../../components/fields/GridTextField';
 
 import { Context } from '../../index';
@@ -43,7 +43,7 @@ function Auth() {
             style={{
               display: 'flex',
               flexDirection: 'column',
-              marginTop: '10px',
+              marginTop: '10px'
             }}
           >
             <Grid container spacing={2} style={{ marginTop: '10px' }}>
@@ -108,11 +108,7 @@ function Auth() {
                   </>
                 )}
               </Grid>
-              <Grid
-                item
-                md={6}
-                sx={{ display: 'flex', justifyContent: 'flex-end' }}
-              >
+              <Grid item md={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 <Button
                   type="submit"
                   style={{ width: 'auto' }}

@@ -9,10 +9,8 @@ const Table = ({ options, onRowClick, headerButtons, ...props }) => {
     <MaterialTable
       {...getTableDefault(options)}
       components={{
-        Toolbar: (props) => (
-          <ToolbarCustom headerButtons={headerButtons} props={props} />
-        ),
-        Row: (p) => <MTableBodyRow {...p} onRowClick={onRowClick} />,
+        Toolbar: (props) => <ToolbarCustom headerButtons={headerButtons} props={props} />,
+        Row: (p) => <MTableBodyRow {...p} onRowClick={onRowClick} />
       }}
       {...props}
     />

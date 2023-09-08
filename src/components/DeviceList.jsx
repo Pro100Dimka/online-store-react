@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import React, { useContext } from 'react';
-import { Context } from '../index';
 import { Grid } from '@mui/material';
+import { Context } from '../index';
 import DeviceItem from './DeviceItem';
 
 const DeviceList = observer(() => {
@@ -18,7 +18,7 @@ const DeviceList = observer(() => {
             style={{
               display: 'flex',
               alignItems: 'center',
-              justifyContent: 'center',
+              justifyContent: 'center'
             }}
           >
             <DeviceItem device={device} />

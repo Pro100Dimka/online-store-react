@@ -12,7 +12,7 @@ function SnackbarCloseButton({ snackbarKey }) {
         color: 'pink',
         fontSize: '18px',
         paddingRight: '8px',
-        cursor: 'pointer',
+        cursor: 'pointer'
       }}
     >
       X

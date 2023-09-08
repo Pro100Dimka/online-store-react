@@ -1,16 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PageTitle from '../../../components/Page/PageTitle';
 import { Container, Card, Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import { useSnackbar } from 'notistack';
+import PageTitle from '../../../components/Page/PageTitle';
 import ApiService from '../../../components/apiHelper/apiDevice';
 import { BRAND_ROUTE } from '../../../utils/consts';
 import convertDate from '../../../utils/convertDate';
 import { getTableDefault } from '../../../components/MaterialTable/table-helper';
 import Table from '../../../components/MaterialTable';
 import CreateBrand from './CreateBrand';
-import { useSnackbar } from 'notistack';
 
 function BrandsList() {
   const tableRef = useRef();
@@ -24,7 +24,7 @@ function BrandsList() {
         data: responce.rows,
         page: 0,
         pageSize: 1,
-        totalCount: responce.count,
+        totalCount: responce.count
       };
     });
   };
@@ -43,7 +43,7 @@ function BrandsList() {
           .then(() => {
             tableRef.current.onQueryChange();
             enqueueSnackbar(`Елемент ${oldData.name} успішно видалено`, {
-              variant: 'success',
+              variant: 'success'
             });
             resolve();
           })
@@ -51,7 +51,7 @@ function BrandsList() {
             enqueueSnackbar(error.response.data.message, { variant: 'error' });
             reject();
           });
-      }),
+      })
   };
   return (
     <Container style={{ maxWidth: '1850px' }}>
@@ -71,26 +71,27 @@ function BrandsList() {
             {
               title: 'Назва',
               field: 'name',
-              width: '50%',
+              width: '50%'
             },
             {
               title: 'Дата створення',
               field: 'createdAt',
               width: '25%',
-              render: (rowData) => convertDate(rowData.createdAt),
+              render: (rowData) => convertDate(rowData.createdAt)
             },
             {
               title: 'Дата змінення',
               field: 'updatedAt',
               width: '25%',
-              render: (rowData) => convertDate(rowData.updatedAt),
-            },
+              render: (rowData) => convertDate(rowData.updatedAt)
+            }
           ]}
           icons={{
-            Delete: () => <DeleteIcon />,
+            Delete: <DeleteIcon />
           }}
           headerButtons={[
             <Button
+              key="addNewBrandButton"
               variant="contained"
               sx={{ backgroundColor: 'black', borderRadius: '10px' }}
               startIcon={<AddIcon />}
@@ -99,22 +100,22 @@ function BrandsList() {
               }}
             >
               Додати новий бренд
-            </Button>,
+            </Button>
           ]}
           data={getData}
           editable={action}
           actions={[
             {
-              icon: () => (
+              icon: (
                 <EditIcon
                   style={{
-                    cursor: 'pointer',
+                    cursor: 'pointer'
                   }}
                 />
               ),
               tooltip: 'Редагувати бренд',
-              onClick: (_event, rowData) => editItem(rowData),
-            },
+              onClick: (_event, rowData) => editItem(rowData)
+            }
           ]}
         />
       </Card>

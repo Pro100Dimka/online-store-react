@@ -1,15 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
-import PageTitle from '../../../components/Page/PageTitle';
 import { Container, Card, Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import { enqueueSnackbar } from 'notistack';
+import PageTitle from '../../../components/Page/PageTitle';
 import ApiService from '../../../components/apiHelper/apiDevice';
 import { DEVICE_ROUTE } from '../../../utils/consts';
 import { getTableDefault } from '../../../components/MaterialTable/table-helper';
 import Table from '../../../components/MaterialTable';
 import CreateDevice from './Modal';
-import { enqueueSnackbar } from 'notistack';
 
 function DeviceList() {
   const tableRef = useRef();
@@ -21,7 +21,7 @@ function DeviceList() {
       sortOrder: query?.orderDirection || 'asc',
       sortField: query.orderBy?.field || 'id',
       limit: query.pageSize,
-      page: query.page + 1,
+      page: query.page + 1
     };
 
     return deviceApi.getAllItems(queryObj).then((responce) => {
@@ -29,7 +29,7 @@ function DeviceList() {
         data: responce.rows,
         page: query.page,
         pageSize: query.pageSize,
-        totalCount: responce.count,
+        totalCount: responce.count
       };
     });
   };
@@ -48,7 +48,7 @@ function DeviceList() {
           .then(() => {
             tableRef.current.onQueryChange();
             enqueueSnackbar(`Елемент ${oldData.name} успішно видалено`, {
-              variant: 'success',
+              variant: 'success'
             });
             resolve();
           })
@@ -56,7 +56,7 @@ function DeviceList() {
             enqueueSnackbar(error.response.data.message, { variant: 'error' });
             reject();
           });
-      }),
+      })
   };
   return (
     <Container style={{ maxWidth: '1850px' }}>
@@ -73,7 +73,7 @@ function DeviceList() {
           tableRef={tableRef}
           {...getTableDefault()}
           icons={{
-            Delete: () => <DeleteIcon />,
+            Delete: <DeleteIcon />
           }}
           columns={[
             {
@@ -83,37 +83,38 @@ function DeviceList() {
               render: (rowData) => (
                 <img
                   src={`${process.env.REACT_APP_API_URL}/${rowData.img}`}
-                  width={'100%'}
+                  width="100%"
                   alt={rowData.name}
                   style={{ maxHeight: '347px', maxWidth: '347px' }}
                 />
-              ),
+              )
             },
             {
               title: 'Назва',
-              field: 'name',
+              field: 'name'
             },
             {
               title: 'Бренд',
-              field: 'brandId',
+              field: 'brandId'
             },
             {
               title: 'Тип',
-              field: 'typeId',
+              field: 'typeId'
             },
             {
               title: 'Ціна',
-              field: 'price',
+              field: 'price'
             },
             {
               title: 'Рейтинг',
               field: 'rating',
-              width: '10%',
-            },
+              width: '10%'
+            }
           ]}
           editable={action}
           headerButtons={[
             <Button
+              key="addNewDeviceButton"
               variant="contained"
               sx={{ backgroundColor: 'black', borderRadius: '10px' }}
               startIcon={<AddIcon />}
@@ -122,23 +123,23 @@ function DeviceList() {
               }}
             >
               Додати новий пристрій
-            </Button>,
+            </Button>
           ]}
           data={getData}
           actions={[
             {
-              icon: () => (
+              icon: (
                 <EditIcon
                   style={{
-                    cursor: 'pointer',
+                    cursor: 'pointer'
                   }}
                 />
               ),
               tooltip: 'Редагувати пристрій',
-              onClick: (_event, rowData) => editItem(rowData),
-            },
+              onClick: (_event, rowData) => editItem(rowData)
+            }
           ]}
-        ></Table>
+        />
       </Card>
     </Container>
   );

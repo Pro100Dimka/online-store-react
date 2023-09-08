@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
-import { DEVICE_ROUTE } from '../../../../../utils/consts';
 import { useContext } from 'react';
+import { DEVICE_ROUTE } from '../../../../../utils/consts';
 import { Context } from '../../../../..';
 
 const Schema = (typeForm) => {
@@ -11,7 +11,7 @@ const Schema = (typeForm) => {
         .min(2, `Мінімальна довжина ${2} символи`)
         .max(20, `Максимальна довжина ${20} символів`)
         .required(`Це поле обов'язкове`)
-        .nullable(),
+        .nullable()
     })
     .when((_values, schema) => {
       if (typeForm === DEVICE_ROUTE) {
@@ -23,7 +23,7 @@ const Schema = (typeForm) => {
             .nullable()
             .required('Поле обов`язкове')
             .oneOf(device._brands.concat([null])),
-          price: Yup.number().nullable(),
+          price: Yup.number().nullable()
         });
       }
       return schema.shape({});

@@ -15,50 +15,50 @@ import {
   DEVICE_ROUTE,
   DEVICES_LIST,
   BRANDS_LIST,
-  TYPES_LIST,
+  TYPES_LIST
 } from '../../utils/consts';
 import TypesList from '../../pages/AdminPages/TypesList';
 
 export const adminRoutes = [
   {
     path: ADMIN_ROUTE,
-    Component: AdminPanel,
+    Component: AdminPanel
   },
   {
     path: `${ADMIN_ROUTE}${DEVICES_LIST}`,
-    Component: DeviceList,
+    Component: DeviceList
   },
   {
     path: `${ADMIN_ROUTE}${BRANDS_LIST}`,
-    Component: BrandsList,
+    Component: BrandsList
   },
   {
     path: `${ADMIN_ROUTE}${TYPES_LIST}`,
-    Component: TypesList,
-  },
+    Component: TypesList
+  }
 ];
 
 export const authRoutes = [
   {
     path: BASKET_ROUTE,
-    Component: Basket,
-  },
+    Component: Basket
+  }
 ];
 export const publicRoutes = [
   {
     path: SHOP_ROUTE,
-    Component: Shop,
+    Component: Shop
   },
   {
     path: LOGIN_ROUTE,
-    Component: Auth,
+    Component: Auth
   },
   {
     path: REGISTRATION_ROUTE,
-    Component: Auth,
+    Component: Auth
   },
   {
-    path: DEVICE_ROUTE + '/:id',
-    Component: Device,
-  },
+    path: `${DEVICE_ROUTE}/:id`,
+    Component: Device
+  }
 ];

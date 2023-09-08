@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap';
+import { Button, Card, Container, Image } from 'react-bootstrap';
 import { Grid, Typography } from '@mui/material';
-import Star from '../../img/Star1.png';
 import { useParams } from 'react-router-dom';
-import ApiService, { fetchDevice } from '../../components/apiHelper/apiDevice';
-import { DEVICE_ROUTE } from '../../utils/consts';
 import { enqueueSnackbar } from 'notistack';
+import Star from '../../img/Star1.png';
+import ApiService from '../../components/apiHelper/apiDevice';
+import { DEVICE_ROUTE } from '../../utils/consts';
 
 function DevicePage() {
   const apiDevice = new ApiService(DEVICE_ROUTE);
@@ -17,9 +17,7 @@ function DevicePage() {
       .then((response) => {
         setDevice(response);
       })
-      .catch((error) =>
-        enqueueSnackbar(error.response.data.message, { variant: 'error' })
-      );
+      .catch((error) => enqueueSnackbar(error.response.data.message, { variant: 'error' }));
   }, [id]);
   return (
     <Container style={{ maxWidth: '90%' }}>
@@ -31,14 +29,10 @@ function DevicePage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexDirection: 'column',
+            flexDirection: 'column'
           }}
         >
-          <Image
-            width={400}
-            height={400}
-            src={`${process.env.REACT_APP_API_URL}/${device.img}`}
-          />
+          <Image width={400} height={400} src={`${process.env.REACT_APP_API_URL}/${device.img}`} />
         </Grid>
         <Grid
           item
@@ -47,7 +41,7 @@ function DevicePage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexDirection: 'column',
+            flexDirection: 'column'
           }}
         >
           <Typography variant="h3">{device.name}</Typography>
@@ -60,7 +54,7 @@ function DevicePage() {
               background: `url(${Star}) no-repeat center center`,
               width: 340,
               height: 340,
-              backgroundSize: 'cover',
+              backgroundSize: 'cover'
             }}
           >
             <Typography fontSize={64}>{device.rating}</Typography>
@@ -73,7 +67,7 @@ function DevicePage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            flexDirection: 'column',
+            flexDirection: 'column'
           }}
         >
           <Card
@@ -82,11 +76,11 @@ function DevicePage() {
               width: 400,
               height: 400,
               fontSize: 32,
-              border: '5px solid lightgray',
+              border: '5px solid lightgray'
             }}
           >
             <h3>{device.price} грн.</h3>
-            <Button variant={'outline-dark'}>Додати в кошик</Button>
+            <Button variant="outline-dark">Додати в кошик</Button>
           </Card>
         </Grid>
         <Grid item md={12}>
@@ -97,7 +91,7 @@ function DevicePage() {
               key={desc.id}
               style={{
                 background: index % 2 ? 'lightgray' : 'transperent',
-                padding: 10,
+                padding: 10
               }}
             >
               {desc.title}:{desc.description}

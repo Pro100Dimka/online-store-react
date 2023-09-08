@@ -1,10 +1,4 @@
-import {
-  Grid,
-  Select,
-  InputLabel,
-  FormControl,
-  OutlinedInput,
-} from '@mui/material';
+import { Grid, Select, InputLabel, FormControl, OutlinedInput } from '@mui/material';
 
 export default function GridSelect({
   sm,
@@ -14,20 +8,20 @@ export default function GridSelect({
   field,
   formik,
   option,
-  multiple,
+  multiple
 }) {
   const { setFieldValue, touched, errors, values } = formik;
   return (
     <Grid item sm={sm} xs={xs} md={md}>
       <FormControl fullWidth>
-        <InputLabel shrink id={`labelParagraph`}>
+        <InputLabel shrink id="labelParagraph">
           {labelParagraph}
         </InputLabel>
         <Select
           multiple={multiple}
           label={labelParagraph}
           input={<OutlinedInput notched label={labelParagraph} />}
-          labelId={`labelParagraph`}
+          labelId="labelParagraph"
           size="medium"
           fullWidth
           value={values[field]}
@@ -37,9 +31,7 @@ export default function GridSelect({
         >
           {option}
         </Select>
-        {touched[field] && errors[field] && (
-          <div className="output-error">{errors[field]}</div>
-        )}
+        {touched[field] && errors[field] && <div className="output-error">{errors[field]}</div>}
       </FormControl>
     </Grid>
   );

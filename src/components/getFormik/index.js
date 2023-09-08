@@ -5,7 +5,7 @@ function NewFormikObject(InitialValues, schema, Submit) {
     initialValues: InitialValues,
     enableReinitialize: true,
     validationSchema: schema,
-    onSubmit: Submit,
+    onSubmit: Submit
   });
   return formik;
 }

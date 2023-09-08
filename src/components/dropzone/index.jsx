@@ -4,14 +4,7 @@ import { useDropzone } from 'react-dropzone';
 import closeFill from '@iconify/icons-eva/close-fill';
 import { motion, AnimatePresence } from 'framer-motion';
 import { alpha, styled } from '@material-ui/core/styles';
-import {
-  Box,
-  List,
-  Paper,
-  ListItem,
-  IconButton,
-  Typography,
-} from '@mui/material';
+import { Box, List, Paper, ListItem, IconButton, Typography } from '@mui/material';
 
 const DropZoneStyle = styled('div')(({ theme }) => ({
   outline: 'none',
@@ -24,17 +17,16 @@ const DropZoneStyle = styled('div')(({ theme }) => ({
   backgroundColor: theme.palette.grey[100],
   border: `1px dashed ${theme.palette.grey[200]}`,
   '&:hover': { opacity: 0.72, cursor: 'pointer' },
-  [theme.breakpoints.up('md')]: { textAlign: 'left', flexDirection: 'row' },
+  [theme.breakpoints.up('md')]: { textAlign: 'left', flexDirection: 'row' }
 }));
 
 // ---------------------------------------------------------------------
 
 export default function Dropzone({ error, files, onRemove, sx, ...other }) {
   const hasFile = files.length > 0;
-  const { getRootProps, getInputProps, isDragActive, isDragReject } =
-    useDropzone({
-      ...other,
-    });
+  const { getRootProps, getInputProps, isDragActive, isDragReject } = useDropzone({
+    ...other
+  });
 
   return (
     <Box sx={{ width: '100%', ...sx }}>
@@ -45,25 +37,25 @@ export default function Dropzone({ error, files, onRemove, sx, ...other }) {
           ...((isDragReject || error) && {
             color: 'red',
             borderColor: 'black',
-            bgcolor: 'white',
-          }),
+            bgcolor: 'white'
+          })
         }}
         style={{
-          ...(files.length !== 0 && { display: 'none' }),
+          ...(files.length !== 0 && { display: 'none' })
         }}
       >
         <input {...getInputProps()} />
         <Box
           sx={{
             p: 2.4,
-            ml: { md: 2 },
+            ml: { md: 2 }
           }}
         >
           <Typography align="center" gutterBottom variant="h5">
             Завантаження файлу
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-            {`Перемістіть файл або`}&nbsp;
+            Перемістіть файл або&nbsp;
             <Typography
               variant="body2"
               component="span"
@@ -79,7 +71,7 @@ export default function Dropzone({ error, files, onRemove, sx, ...other }) {
         disablePadding
         sx={{
           ...(hasFile && { my: 0 }),
-          ...(hasFile && { display: 'flex', justifyContent: 'center' }),
+          ...(hasFile && { display: 'flex', justifyContent: 'center' })
         }}
       >
         <AnimatePresence>
@@ -97,23 +89,19 @@ export default function Dropzone({ error, files, onRemove, sx, ...other }) {
                   borderRadius: 1.5,
                   overflow: 'hidden',
                   position: 'relative',
-                  display: 'inline-flex',
+                  display: 'inline-flex'
                 }}
               >
                 <Paper
                   variant="outlined"
                   component="img"
-                  src={
-                    isString(file)
-                      ? `${process.env.REACT_APP_API_URL}/${file}`
-                      : preview
-                  }
+                  src={isString(file) ? `${process.env.REACT_APP_API_URL}/${file}` : preview}
                   sx={{
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
                     position: 'absolute',
-                    borderRadius: '8px',
+                    borderRadius: '8px'
                   }}
                 />
 
@@ -126,9 +114,8 @@ export default function Dropzone({ error, files, onRemove, sx, ...other }) {
                       color: 'common.white',
                       bgcolor: (theme) => alpha(theme.palette.grey[900], 0.72),
                       '&:hover': {
-                        bgcolor: (theme) =>
-                          alpha(theme.palette.grey[900], 0.48),
-                      },
+                        bgcolor: (theme) => alpha(theme.palette.grey[900], 0.48)
+                      }
                     }}
                   >
                     <Icon icon={closeFill} />

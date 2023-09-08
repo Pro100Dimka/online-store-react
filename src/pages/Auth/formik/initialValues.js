@@ -3,6 +3,6 @@ const initialValues = {
   password: '',
   phone: '',
   name: '',
-  surname: '',
+  surname: ''
 };
 export default initialValues;

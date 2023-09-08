@@ -1,17 +1,9 @@
 import { Grid, TextField } from '@mui/material';
 
-export default function GridTextField({
-  required,
-  sm,
-  xs,
-  md,
-  labelParagraph,
-  field,
-  formik,
-}) {
+export default function GridTextField({ required, sm, xs, md, labelParagraph, field, formik }) {
   const { errors, touched, values, getFieldProps, setFieldValue } = formik;
   return (
-    <Grid item sm={sm} xs={xs} md={md} /*style={{ marginTop: '20px' }}*/>
+    <Grid item sm={sm} xs={xs} md={md} /* style={{ marginTop: '20px' }} */>
       <TextField
         label={labelParagraph}
         required={required}

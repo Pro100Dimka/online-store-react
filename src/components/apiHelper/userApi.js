@@ -1,5 +1,6 @@
-import { $host, $authHost } from './http';
+// eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
+import { $host, $authHost } from './http';
 
 export const registration = async (email, password, name, surname, phone) => {
   const { data } = await $host.post('api/user/registration', {
@@ -8,7 +9,7 @@ export const registration = async (email, password, name, surname, phone) => {
     password,
     phone,
     name,
-    surname,
+    surname
   });
   localStorage.setItem('token', data.token);
   return jwt_decode(data.token);
@@ -21,7 +22,7 @@ export const login = async (email, password, name, surname, phone, role) => {
     password,
     phone,
     name,
-    surname,
+    surname
   });
   localStorage.setItem('token', data.token);
   return jwt_decode(data.token);
