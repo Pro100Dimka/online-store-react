@@ -1,7 +1,7 @@
 {
   "name": "online-store-sergey",
   "version": "0.1.0",
-  "homepage": "https://Pro100Dimka.github.io/online-store-react-node-express-elephantsql",
+  "homepage": "https://Pro100Dimka.github.io/online-store-react-js",
   "private": true,
   "dependencies": {
     "@babel/core": "^7.16.0",
