@@ -1,15 +1,16 @@
+import ReactDOM from 'react-dom/client';
 import React, { createContext } from 'react';
-import ReactDOM from 'react-dom';
-import { HelmetProvider } from 'react-helmet-async';
 import { SnackbarProvider } from 'notistack';
 import Slide from '@material-ui/core/Slide';
+import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import UserStore from './store/User';
 import DeviceStore from './store/device';
 import SnackbarCloseButton from './components/SnackbarCloseButton';
 
 export const Context = createContext(null);
-ReactDOM.render(
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <Context.Provider
     value={{
       user: new UserStore(),
