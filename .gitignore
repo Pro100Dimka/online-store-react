@@ -5,6 +5,11 @@
 /.pnp
 .pnp.js
 
+/config/
+/scripts/
+/config-overrides.js
+/README.md
+
 # testing
 /coverage
 
