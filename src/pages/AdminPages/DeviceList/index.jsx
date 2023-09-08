@@ -3,7 +3,7 @@ import { Container, Card, Button } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-import { enqueueSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import PageTitle from '../../../components/Page/PageTitle';
 import ApiService from '../../../components/apiHelper/apiDevice';
 import { DEVICE_ROUTE } from '../../../utils/consts';
@@ -12,6 +12,7 @@ import Table from '../../../components/MaterialTable';
 import CreateDevice from './Modal';
 
 function DeviceList() {
+  const { enqueueSnackbar } = useSnackbar();
   const tableRef = useRef();
   const deviceApi = new ApiService(DEVICE_ROUTE);
   const [isOpenDeviceModal, setIsOpenDeviceModal] = useState(false);

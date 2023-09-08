@@ -4,7 +4,6 @@ import { Button } from 'react-bootstrap';
 import { Form, FormikProvider } from 'formik';
 import { useSnackbar } from 'notistack';
 import { Context } from '../../../..';
-import Dropzone from '../../../../components/dropzone';
 import CustomModal from '../../../../components/CustModal';
 import GridTextField from '../../../../components/fields/GridTextField';
 import GridSelect from '../../../../components/fields/GridSelect';
@@ -85,7 +84,7 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
           </Typography>
           <Grid container spacing={2}>
             <Grid item md={5} sx={{ display: 'flex', alignItems: 'center', height: 285 }}>
-              <Dropzone
+              {/* <Dropzone
                 files={values.img}
                 sx={{
                   height: '100%',
@@ -107,7 +106,7 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
                   );
                 }}
                 onRemove={() => setFieldValue('img', [])}
-              />
+              /> */}
             </Grid>
             <Grid item md={7}>
               <Grid container spacing={2}>

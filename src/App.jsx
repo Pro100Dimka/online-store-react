@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import { observer } from 'mobx-react-lite';
 import { useContext, useEffect, useState } from 'react';
-import { enqueueSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import AppRouter from './components/router';
 import NavBar from './components/NavBar';
 import { Context } from './index';
@@ -16,6 +16,7 @@ const App = observer(() => {
   const apiTypes = new ApiService(TYPE_ROUTE);
   const apiBrands = new ApiService(BRAND_ROUTE);
   const apiDevice = new ApiService(DEVICE_ROUTE);
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const promises = [apiTypes.getAllItems(), apiBrands.getAllItems(), apiDevice.getAllItems()];

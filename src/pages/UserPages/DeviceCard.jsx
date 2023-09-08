@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Button, Card, Container, Image } from 'react-bootstrap';
 import { Grid, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
-import { enqueueSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 import Star from '../../img/Star1.png';
 import ApiService from '../../components/apiHelper/apiDevice';
 import { DEVICE_ROUTE } from '../../utils/consts';
 
 function DevicePage() {
+  const { enqueueSnackbar } = useSnackbar();
   const apiDevice = new ApiService(DEVICE_ROUTE);
   const { id } = useParams();
   const [device, setDevice] = useState({ info: [] });
