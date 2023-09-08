@@ -1,8 +1,8 @@
-import ReactDOM from 'react-dom/client';
 import React, { createContext } from 'react';
+import ReactDOM from 'react-dom/client';
+import { HelmetProvider } from 'react-helmet-async';
 import { SnackbarProvider } from 'notistack';
 import Slide from '@material-ui/core/Slide';
-import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import UserStore from './store/User';
 import DeviceStore from './store/device';
