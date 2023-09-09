@@ -87,7 +87,7 @@ function TypesList() {
             }
           ]}
           icons={{
-            Delete: <DeleteIcon />
+            Delete: () => <DeleteIcon />
           }}
           headerButtons={[
             <Button
@@ -106,7 +106,7 @@ function TypesList() {
           editable={action}
           actions={[
             {
-              icon: (
+              icon: () => (
                 <EditIcon
                   style={{
                     cursor: 'pointer'

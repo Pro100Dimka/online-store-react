@@ -22,7 +22,7 @@ function CustModal({ isOpenBrandModal, setIsOpenBrandModal, labelId, children })
       onClose={() => setIsOpenBrandModal(!isOpenBrandModal)}
       closeAfterTransition
       slots={{ backdrop: Backdrop }}
-      slotProps={{
+      slotprops={{
         backdrop: {
           timeout: 500
         }

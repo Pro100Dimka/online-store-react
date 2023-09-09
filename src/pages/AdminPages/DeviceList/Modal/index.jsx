@@ -14,6 +14,7 @@ import initialValues from '../../AdminPanel/Modal/formik/initialValues';
 import Schema from '../../AdminPanel/Modal/formik/Schema';
 import { DEVICE_ROUTE } from '../../../../utils/consts';
 import fetchFileInfo from '../../../../components/apiHelper/fetchFile';
+import DragNDrop from '../../../../components/fields/DragNDrop';
 
 function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, tableRef }) {
   const apiDevice = new ApiService(DEVICE_ROUTE);
@@ -84,6 +85,25 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
           </Typography>
           <Grid container spacing={2}>
             <Grid item md={5} sx={{ display: 'flex', alignItems: 'center', height: 285 }}>
+              <DragNDrop
+                file={values.img}
+                setFiles={(acceptedFiles) => {
+                  setFieldValue(
+                    'img',
+                    acceptedFiles.map((file) => {
+                      console.log(
+                        Object.assign(file, {
+                          preview: URL.createObjectURL(file)
+                        })
+                      );
+                      return Object.assign(file, {
+                        preview: URL.createObjectURL(file)
+                      });
+                    })
+                  );
+                }}
+                onRemove={() => setFieldValue('img', [])}
+              />
               {/* <Dropzone
                 files={values.img}
                 sx={{

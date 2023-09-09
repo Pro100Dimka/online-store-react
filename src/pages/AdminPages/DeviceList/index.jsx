@@ -74,7 +74,7 @@ function DeviceList() {
           tableRef={tableRef}
           {...getTableDefault()}
           icons={{
-            Delete: <DeleteIcon />
+            Delete: () => <DeleteIcon />
           }}
           columns={[
             {
@@ -129,7 +129,7 @@ function DeviceList() {
           data={getData}
           actions={[
             {
-              icon: (
+              icon: () => (
                 <EditIcon
                   style={{
                     cursor: 'pointer'

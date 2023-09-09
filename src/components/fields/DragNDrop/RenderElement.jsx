@@ -1,12 +1,12 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 
-const RenderElement = (doc) => {
+const RenderElement = ({ doc }) => {
   const fileExtension = doc.name.split('.').pop();
   const pdfIframe = (
     <iframe
       key={doc.name}
-      className="iFrameStyles"
+      className="iframe-styles"
       src={doc.data}
       title={`PDF Document: ${doc.name}`}
     />
@@ -15,17 +15,18 @@ const RenderElement = (doc) => {
   const defIframe = (
     <iframe
       key={doc.name}
-      className="iFrameStyles"
+      className="iframe-styles"
       src={doc.data}
       title={`Def Document: ${doc.name}`}
     />
   );
   const videoElement = (
-    <video className="iFrameStyles" style={{ background: 'black' }} controls key={doc.name}>
+    <video className="iframe-styles" style={{ background: 'black' }} controls key={doc.name}>
       <source src={doc.data} type={`video/${fileExtension}`} />
       Ваш браузер не поддерживает просмотр видео
     </video>
   );
+  const imgElement = <img src={doc.preview} className="iframe-styles" alt={doc.name} />;
 
   switch (fileExtension) {
     case 'pdf':
@@ -38,6 +39,8 @@ const RenderElement = (doc) => {
       return videoElement;
     case 'docx':
       return wordIframe;
+    case 'jpg':
+      return imgElement;
     default:
       return defIframe;
   }

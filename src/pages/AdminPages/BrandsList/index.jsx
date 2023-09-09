@@ -87,7 +87,7 @@ function BrandsList() {
             }
           ]}
           icons={{
-            Delete: <DeleteIcon />
+            Delete: () => <DeleteIcon />
           }}
           headerButtons={[
             <Button
@@ -106,7 +106,7 @@ function BrandsList() {
           editable={action}
           actions={[
             {
-              icon: (
+              icon: () => (
                 <EditIcon
                   style={{
                     cursor: 'pointer'
