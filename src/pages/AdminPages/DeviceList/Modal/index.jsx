@@ -80,6 +80,7 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
             marginTop: '10px'
           }}
         >
+          {/*  */}
           <Typography id={labelId} variant="h6" component="h2">
             Додати новий пристрій
           </Typography>
