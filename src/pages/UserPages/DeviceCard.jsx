@@ -21,6 +21,7 @@ function DevicePage() {
       })
       .catch((error) => enqueueSnackbar(error.response.data.message, { variant: 'error' }));
   }, [id]);
+  alert('check');
   return (
     device?.fileData && (
       <Container style={{ maxWidth: '90%' }}>
