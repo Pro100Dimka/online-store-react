@@ -15,12 +15,12 @@ function AppRouter() {
   // }, [user._isAuth]);
   return (
     <Routes>
-      {user._isAuth &&
-        authRoutes.map(({ path, Component }) => (
+      {user._isAuth
+        && authRoutes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} exact />
         ))}
-      {role === 'ADMIN' &&
-        adminRoutes.map(({ path, Component }) => (
+      {role === 'ADMIN'
+        && adminRoutes.map(({ path, Component }) => (
           <Route key={path} path={path} element={<Component />} exact />
         ))}
       {publicRoutes.map(({ path, Component }) => (

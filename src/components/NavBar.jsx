@@ -173,7 +173,6 @@ const NavBar = observer(() => {
           </Toolbar>
         </Container>
       </AppBar>
-      <br />
     </ThemeProvider>
   );
 });

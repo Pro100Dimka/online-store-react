@@ -1,34 +1,28 @@
 import React from 'react';
-import { Button, Container } from 'react-bootstrap';
+import { Button, Container, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import { ADMIN_ROUTE, BRANDS_LIST, DEVICES_LIST, TYPES_LIST } from '../../../utils/consts';
+import { ADMIN_ROUTE } from '../../../utils/consts';
+import buttons from './consts/buttons';
+import './index.css';
 
 function AdminPanel() {
   const navigate = useNavigate();
   return (
-    <Container className="d-flex flex-column ">
-      <Button
-        variant="outline-dark"
-        className="mt-4 p-4"
-        onClick={() => navigate(`${ADMIN_ROUTE}${DEVICES_LIST}`)}
-      >
-        Товари
-      </Button>
-      <Button
-        variant="outline-dark"
-        className="mt-4 p-4"
-        onClick={() => navigate(`${ADMIN_ROUTE}${BRANDS_LIST}`)}
-      >
-        Бренди
-      </Button>
-      <Button
-        variant="outline-dark"
-        className="mt-4 p-4"
-        onClick={() => navigate(`${ADMIN_ROUTE}${TYPES_LIST}`)}
-      >
-        Категорії товірів
-      </Button>
-    </Container>
+    <Box className="horizontal-vertical-center-flex admin-main-box">
+      <Container className="vertical-center-row admin-main-container">
+        {buttons.map((button, index) => (
+          <Button
+            key={index}
+            size="large"
+            variant="contained"
+            fullWidth
+            onClick={() => navigate(`${ADMIN_ROUTE}${button.route}`)}
+          >
+            {button.label}
+          </Button>
+        ))}
+      </Container>
+    </Box>
   );
 }
 

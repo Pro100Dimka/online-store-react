@@ -3,7 +3,9 @@ import React, { useState, useRef } from 'react';
 import './DragNDrop.css';
 import RenderElement from './RenderElement';
 
-const DragNDrop = ({ multiply, file, setFiles, onRemove }) => {
+const DragNDrop = ({
+  multiply, file, setFiles, onRemove
+}) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
   const selectFiles = () => {
@@ -67,7 +69,8 @@ const DragNDrop = ({ multiply, file, setFiles, onRemove }) => {
           ) : (
             ((multiply && file.length > 0) || file.length === 0) && (
               <>
-                Перетащите файл сюда или{' '}
+                Перетащите файл сюда или
+                {' '}
                 {
                   // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                   <span className="select" onClick={selectFiles}>
@@ -88,8 +91,8 @@ const DragNDrop = ({ multiply, file, setFiles, onRemove }) => {
         </div>
       )}
       <div className="container">
-        {file &&
-          file.map((file, index) => (
+        {file
+          && file.map((file, index) => (
             <div className="image" key={index}>
               {
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions

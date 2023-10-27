@@ -1,15 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Container, Card, Button } from '@mui/material';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
 import { useSnackbar } from 'notistack';
-import PageTitle from '../../../components/Page/PageTitle';
-import ApiService from '../../../components/apiHelper/apiDevice';
 import { TYPE_ROUTE } from '../../../utils/consts';
 import convertDate from '../../../utils/convertDate';
 import { getTableDefault } from '../../../components/MaterialTable/table-helper';
-import Table from '../../../components/MaterialTable';
+import { PageTitle, Table, ApiService, EditIcon, DeleteIcon, AddIcon } from '../../../components';
 import CreateType from './CreateType';
 
 function TypesList() {

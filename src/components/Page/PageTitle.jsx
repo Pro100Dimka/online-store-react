@@ -5,7 +5,9 @@ import { useTheme } from '@mui/material/styles';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
-function PageTitle({ text, isReturnButton, isEdit, editFunc, textAlign }) {
+function PageTitle({
+  text, isReturnButton, isEdit, editFunc, textAlign
+}) {
   const theme = useTheme();
   const navigate = useNavigate();
   return (

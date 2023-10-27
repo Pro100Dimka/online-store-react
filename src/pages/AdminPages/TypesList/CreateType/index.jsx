@@ -3,14 +3,9 @@ import { Grid, Typography } from '@mui/material';
 import { Button } from 'react-bootstrap';
 import { Form, FormikProvider } from 'formik';
 import { useSnackbar } from 'notistack';
-import CustomModal from '../../../../components/CustModal';
-import initialValues from '../../AdminPanel/Modal/formik/initialValues';
-import submit from '../../AdminPanel/Modal/formik/Submit';
-import Schema from '../../AdminPanel/Modal/formik/Schema';
-import NewFormikObject from '../../../../components/getFormik';
-import GridTextField from '../../../../components/fields/GridTextField';
+import { submit, initialValues, Schema } from '../../components/index';
+import { CustomModal, NewFormikObject, GridTextField, ApiService } from '../../../../components';
 import { TYPE_ROUTE } from '../../../../utils/consts';
-import ApiService from '../../../../components/apiHelper/apiDevice';
 
 function CreateType({ isOpenTypeModal, setIsOpenTypeModal, tableRef, typeID }) {
   const apiTypes = new ApiService(TYPE_ROUTE);

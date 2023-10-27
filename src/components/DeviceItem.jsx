@@ -21,7 +21,9 @@ const DeviceItem = ({ device }) => {
       <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
         <Typography variant="subtitle1">Samsung...</Typography>
         <Typography>
-          {device.rating} <StarBorderIcon style={{ width: '20px' }} />
+          {device.rating}
+          {' '}
+          <StarBorderIcon style={{ width: '20px' }} />
         </Typography>
       </div>
       <Typography variant="subtitle1" style={{ fontWeight: 600 }}>

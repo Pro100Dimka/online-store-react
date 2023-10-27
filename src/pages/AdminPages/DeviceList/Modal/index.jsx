@@ -8,10 +8,8 @@ import CustomModal from '../../../../components/CustModal';
 import GridTextField from '../../../../components/fields/GridTextField';
 import GridSelect from '../../../../components/fields/GridSelect';
 import ApiService from '../../../../components/apiHelper/apiDevice';
-import submit from '../../AdminPanel/Modal/formik/Submit';
 import NewFormikObject from '../../../../components/getFormik';
-import initialValues from '../../AdminPanel/Modal/formik/initialValues';
-import Schema from '../../AdminPanel/Modal/formik/Schema';
+import { submit, initialValues, Schema } from '../../components/index';
 import { DEVICE_ROUTE } from '../../../../utils/consts';
 import fetchFileInfo from '../../../../components/apiHelper/fetchFile';
 import DragNDrop from '../../../../components/fields/DragNDrop';
@@ -48,8 +46,7 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
                 files.map((file) =>
                   Object.assign(file, {
                     preview: URL.createObjectURL(file)
-                  })
-                )
+                  }))
               );
             }
           })

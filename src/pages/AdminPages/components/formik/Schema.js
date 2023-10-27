@@ -1,7 +1,7 @@
 import * as Yup from 'yup';
 import { useContext } from 'react';
-import { DEVICE_ROUTE } from '../../../../../utils/consts';
-import { Context } from '../../../../..';
+import { DEVICE_ROUTE } from '../../../../utils/consts';
+import { Context } from '../../../..';
 
 const Schema = (typeForm) => {
   const { device } = useContext(Context);
@@ -10,7 +10,7 @@ const Schema = (typeForm) => {
       name: Yup.string()
         .min(2, `Мінімальна довжина ${2} символи`)
         .max(20, `Максимальна довжина ${20} символів`)
-        .required(`Це поле обов'язкове`)
+        .required("Це поле обов'язкове")
         .nullable()
     })
     .when((_values, schema) => {

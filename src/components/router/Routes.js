@@ -1,6 +1,6 @@
 import AdminPanel from '../../pages/AdminPages/AdminPanel';
 import Basket from '../../pages/UserPages/Basket';
-import Shop from '../../pages/UserPages/Shop';
+import ShopMainPage from '../../pages/UserPages/ShopMainPage';
 import Device from '../../pages/UserPages/DeviceCard';
 import Auth from '../../pages/Auth';
 import DeviceList from '../../pages/AdminPages/DeviceList';
@@ -47,7 +47,7 @@ export const authRoutes = [
 export const publicRoutes = [
   {
     path: SHOP_ROUTE,
-    Component: Shop
+    Component: ShopMainPage
   },
   {
     path: LOGIN_ROUTE,

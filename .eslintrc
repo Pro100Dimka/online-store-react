@@ -5,8 +5,9 @@
     "node": true
   },
   "extends": [
+    "eslint:recommended", "plugin:react/recommended",
+    "react-app",
     "airbnb",
-    "prettier",
     "plugin:jsx-a11y/recommended",
     "plugin:react-hooks/recommended"
   ],
@@ -17,11 +18,13 @@
     "requireConfigFile": false,
     "ecmaFeatures": {
       "experimentalObjectRestSpread": true,
-      "impliedStrict": true
+      "impliedStrict": true,
+      "jsx": true // Добавьте эту опцию для поддержки JSX
     }
   },
   "rules": {
     "import": 0,
+    "import/no-unresolved": "error",
     "max-len": 0,
     "no-alert": 0,
     "no-shadow": 0,
@@ -55,8 +58,7 @@
     "react-hooks/rules-of-hooks": 2,
     "react-hooks/exhaustive-deps": 0,
     "no-prototype-builtins": 0,
-    "no-restricted-syntax":0,
-    "import/no-unresolved": 0,
+    "no-restricted-syntax": 0,
     "no-unused-vars": [
       1,
       {
@@ -65,15 +67,11 @@
     ],
     "arrow-body-style": 0,
     "react/function-component-definition": 0,
-    "prettier/prettier": [
-      2,
-      {
-        "printWidth": 100,
-        "singleQuote": true,
-        "trailingComma": "none",
-        "endOfLine": "auto",
-        "tabWidth": 2
-      }
-    ]
+    "react/no-unstable-nested-components": "off",
+    "object-curly-newline": "off",
+    "linebreak-style": "off",
+    "no-mixed-spaces-and-tabs": "off",
+    "implicit-arrow-linebreak": "off",
+    "react/jsx-one-expression-per-line": "off"
   }
 }

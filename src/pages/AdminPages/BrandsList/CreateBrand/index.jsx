@@ -6,10 +6,8 @@ import { useSnackbar } from 'notistack';
 import GridTextField from '../../../../components/fields/GridTextField';
 import CustomModal from '../../../../components/CustModal';
 import ApiService from '../../../../components/apiHelper/apiDevice';
-import submit from '../../AdminPanel/Modal/formik/Submit';
+import { submit, initialValues, Schema } from '../../components/index';
 import NewFormikObject from '../../../../components/getFormik';
-import initialValues from '../../AdminPanel/Modal/formik/initialValues';
-import Schema from '../../AdminPanel/Modal/formik/Schema';
 import { BRAND_ROUTE } from '../../../../utils/consts';
 
 function CreateBrand({ isOpenBrandModal, setIsOpenBrandModal, tableRef, brandID }) {

@@ -10,10 +10,9 @@ export default class ApiService {
     if (query) {
       const queryObj = Object.keys(query);
       queryObj.forEach(
-        (field, key) =>
-          (absUrl += `${key === 0 ? '?' : ''}${field}=${query[field]}${
-            key !== queryObj.length - 1 ? '&' : ''
-          }`)
+        (field, key) => (absUrl += `${key === 0 ? '?' : ''}${field}=${query[field]}${
+          key !== queryObj.length - 1 ? '&' : ''
+        }`)
       );
     }
 
@@ -23,8 +22,7 @@ export default class ApiService {
 
   createItem = async (body) => this.getResource($authHost, '', '', body, 'post');
 
-  updateItemById = async (id, body) =>
-    this.getResource($authHost, `/update/${id}`, '', body, 'post');
+  updateItemById = async (id, body) => this.getResource($authHost, `/update/${id}`, '', body, 'post');
 
   getAllItems = async (query) => this.getResource($host, '', query);
 

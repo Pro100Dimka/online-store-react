@@ -1,4 +1,6 @@
-import { Grid, Select, InputLabel, FormControl, OutlinedInput } from '@mui/material';
+import {
+  Grid, Select, InputLabel, FormControl, OutlinedInput
+} from '@mui/material';
 
 export default function GridSelect({
   sm,
@@ -10,7 +12,9 @@ export default function GridSelect({
   option,
   multiple
 }) {
-  const { setFieldValue, touched, errors, values } = formik;
+  const {
+    setFieldValue, touched, errors, values
+  } = formik;
   return (
     <Grid item sm={sm} xs={xs} md={md}>
       <FormControl fullWidth>

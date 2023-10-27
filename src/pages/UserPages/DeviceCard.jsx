@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Container, Image } from 'react-bootstrap';
+import {
+  Button, Card, Container, Image
+} from 'react-bootstrap';
 import { Grid, Typography } from '@mui/material';
 import { useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
@@ -80,7 +82,11 @@ function DevicePage() {
               border: '5px solid lightgray'
             }}
           >
-            <h3>{device.price} грн.</h3>
+            <h3>
+              {device.price}
+              {' '}
+              грн.
+            </h3>
             <Button variant="outline-dark">Додати в кошик</Button>
           </Card>
         </Grid>
@@ -95,7 +101,9 @@ function DevicePage() {
                 padding: 10
               }}
             >
-              {desc.title}:{desc.description}
+              {desc.title}
+              :
+              {desc.description}
             </Grid>
           ))}
         </Grid>

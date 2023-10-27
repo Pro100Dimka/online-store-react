@@ -40,7 +40,7 @@ export const getTableDefault = (additionalOptions) => {
       },
       pagination: {
         labelRowsPerPage: '',
-        labelDisplayedRows: `{from}-{to} з {count}`,
+        labelDisplayedRows: '{from}-{to} з {count}',
         firstAriaLabel: 'Перша сторінка',
         firstTooltip: 'Перша сторінка',
         previousAriaLabel: 'Попередня сторінка',

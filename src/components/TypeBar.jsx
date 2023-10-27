@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Box, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import {
+  Box, List, ListItem, ListItemButton, ListItemText
+} from '@mui/material';
 import { Context } from '../index';
 import { SELECTED_TYPE } from '../utils/consts';
 
@@ -15,8 +17,8 @@ const TypeBar = observer(() => {
           borderRadius: '10px'
         }}
       >
-        {device._types?.rows &&
-          device._types.rows.map((type, key) => (
+        {device._types?.rows
+          && device._types.rows.map((type, key) => (
             <ListItem
               sx={{
                 borderBottom:

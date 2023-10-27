@@ -1,6 +1,8 @@
 import React, { useContext } from 'react';
 import { observer } from 'mobx-react-lite';
-import { Box, List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import {
+  Box, List, ListItem, ListItemButton, ListItemText
+} from '@mui/material';
 import { Context } from '../index';
 import { SELECTED_BRAND } from '../utils/consts';
 
@@ -22,8 +24,8 @@ const BrandBar = observer(() => {
           '::-webkit-scrollbar': { display: 'none' }
         }}
       >
-        {device._brands.rows &&
-          device._brands?.rows.map((brand) => (
+        {device._brands.rows
+          && device._brands?.rows.map((brand) => (
             <ListItem
               sx={{
                 borderRadius: '5px 5px 0 0',

@@ -1,5 +1,7 @@
 import React, { useRef } from 'react';
-import { Modal, Box, Backdrop, Fade } from '@mui/material';
+import {
+  Modal, Box, Backdrop, Fade
+} from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -13,7 +15,9 @@ const style = {
   p: 3
 };
 
-function CustModal({ isOpenBrandModal, setIsOpenBrandModal, labelId, children }) {
+function CustModal({
+  isOpenBrandModal, setIsOpenBrandModal, labelId, children
+}) {
   const modalRef = useRef();
   return (
     <Modal

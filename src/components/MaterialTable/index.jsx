@@ -4,7 +4,9 @@ import MaterialTable, { MTableBodyRow } from '@material-table/core';
 import { getTableDefault } from './table-helper';
 import ToolbarCustom from './ToolbarCustom';
 
-const Table = ({ options, onRowClick, headerButtons, ...props }) => {
+const Table = ({
+  options, onRowClick, headerButtons, ...props
+}) => {
   return (
     <MaterialTable
       {...getTableDefault(options)}
