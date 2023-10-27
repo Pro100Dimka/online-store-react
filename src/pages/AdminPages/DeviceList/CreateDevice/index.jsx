@@ -34,25 +34,9 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
   useEffect(() => {
     if (deviceID) {
       apiDevice.getItemById(deviceID).then((response) => {
-        Object.keys(response).forEach((key) => {
-          setFieldValue(key, key === 'img' ? [response[key]] : response[key]);
+        Object.keys(response).forEach(async (key) => {
+          setFieldValue(key, key === 'img' ? await fetchFileInfo(response[key]) : response[key]);
         });
-        fetchFileInfo(`${process.env.REACT_APP_API_URL}/${response.img}`)
-          .then((files) => {
-            if (files) {
-              setFieldValue(
-                'img',
-                files.map((file) =>
-                  Object.assign(file, {
-                    preview: URL.createObjectURL(file)
-                  })
-                )
-              );
-            }
-          })
-          .catch((error) => {
-            console.error('Error fetching file info:', error);
-          });
       });
     }
   }, [deviceID]);
@@ -83,16 +67,11 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
                 setFiles={(acceptedFiles) => {
                   setFieldValue(
                     'img',
-                    acceptedFiles.map((file) => {
-                      console.log(
-                        Object.assign(file, {
-                          preview: URL.createObjectURL(file)
-                        })
-                      );
-                      return Object.assign(file, {
+                    acceptedFiles.map((file) =>
+                      Object.assign(file, {
                         preview: URL.createObjectURL(file)
-                      });
-                    })
+                      })
+                    )
                   );
                 }}
                 onRemove={() => setFieldValue('img', [])}

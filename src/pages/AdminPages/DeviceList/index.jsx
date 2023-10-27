@@ -76,14 +76,17 @@ function DeviceList() {
               title: 'Зображення',
               field: 'img',
               width: '25%',
-              render: (rowData) => (
-                <img
-                  src={`${process.env.REACT_APP_API_URL}/${rowData.img}`}
-                  width="100%"
-                  alt={rowData.name}
-                  style={{ maxHeight: '347px', maxWidth: '347px' }}
-                />
-              )
+              render: (rowData) => {
+                const fileData = JSON.parse(rowData.img);
+                return (
+                  <img
+                    src={`data:${fileData.type};base64,${fileData.base64String}`}
+                    width="100%"
+                    alt={fileData.name}
+                    style={{ maxHeight: '347px', maxWidth: '347px' }}
+                  />
+                );
+              }
             },
             {
               title: 'Назва',

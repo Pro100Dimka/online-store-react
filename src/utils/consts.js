@@ -8,7 +8,7 @@ export const BASKET_ROUTE = '/basket';
 export const REGISTRATION_ROUTE = '/registration';
 export const DEVICES_LIST = '/devices-list';
 export const BRANDS_LIST = '/brands-list';
-export const TYPES_LIST = 'types-list';
+export const TYPES_LIST = '/types-list';
 export const SELECTED_TYPE = 'selected-type';
 export const SELECTED_BRAND = 'selected-brand';
 

@@ -11,7 +11,6 @@ const submit = async (values, apiService, enqueueSnackbar, closeModal, tableRef)
     } else {
       data = values;
     }
-    console.log(values.img);
     apiService
       .updateItemById(values.id, data)
       .then(() => {
@@ -24,7 +23,7 @@ const submit = async (values, apiService, enqueueSnackbar, closeModal, tableRef)
       });
   } else {
     let data;
-    if (values.img) {
+    if (values.img.length > 0) {
       data = new FormData();
       data.append('name', values.name);
       data.append('typeId', values.typeId);

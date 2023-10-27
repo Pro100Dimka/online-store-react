@@ -74,7 +74,8 @@
     "implicit-arrow-linebreak": "off",
     "react/jsx-one-expression-per-line": "off",
     "function-paren-newline": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+   "no-plusplus": "off"
 
   }
 }

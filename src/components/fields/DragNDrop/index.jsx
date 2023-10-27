@@ -41,18 +41,18 @@ const DragNDrop = ({ multiply, file, setFiles, onRemove }) => {
 
   return (
     <div className="card">
-      {(file.length === 0 || (file.length > 0 && multiply)) && (
+      {(file?.length === 0 || (file?.length > 0 && multiply)) && (
         <div className="top">
           <p>Завантаження файлу</p>
-          {file.length !== 0 && (
+          {file?.length !== 0 && (
             <>
-              {`Выбрано ${file.length} файлов`}
+              {`Выбрано ${file?.length} файлов`}
               <br />
             </>
           )}
         </div>
       )}
-      {file.length === 0 && (
+      {file?.length === 0 && (
         <div
           className="drag-area"
           onDragOver={onDragOver}
@@ -65,7 +65,7 @@ const DragNDrop = ({ multiply, file, setFiles, onRemove }) => {
           {isDragging ? (
             <span className="select">Перетягніть файл сюди</span>
           ) : (
-            ((multiply && file.length > 0) || file.length === 0) && (
+            ((multiply && file?.length > 0) || file?.length === 0) && (
               <>
                 Перетягніть файл сюди або{' '}
                 {
@@ -87,9 +87,9 @@ const DragNDrop = ({ multiply, file, setFiles, onRemove }) => {
           )}
         </div>
       )}
-      <div className="container" style={{ height: file.length > 0 ? '90%' : 'auto' }}>
-        {file.length > 0 &&
-          file.map((file, index) => (
+      <div className="container" style={{ height: file?.length > 0 ? '90%' : 'auto' }}>
+        {file?.length > 0 &&
+          file?.map((file, index) => (
             <div className="image" key={index}>
               {
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions

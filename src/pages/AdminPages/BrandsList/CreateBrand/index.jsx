@@ -27,7 +27,6 @@ function CreateBrand({ isOpenBrandModal, setIsOpenBrandModal, tableRef, brandID 
   }, [isOpenBrandModal]);
   const formik = NewFormikObject(initialValues, Schema(), onSubmit);
   const { handleSubmit, setFieldValue, setValues } = formik;
-
   return (
     <CustomModal
       isOpenBrandModal={isOpenBrandModal}

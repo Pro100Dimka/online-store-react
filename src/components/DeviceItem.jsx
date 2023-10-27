@@ -7,6 +7,7 @@ import { DEVICE_ROUTE } from '../utils/consts';
 
 const DeviceItem = ({ device }) => {
   const navigate = useNavigate();
+  const fileData = JSON.parse(device.img);
   return (
     <Card
       style={{
@@ -17,13 +18,15 @@ const DeviceItem = ({ device }) => {
       onClick={() => navigate(`${DEVICE_ROUTE}/${device.id}`)}
       border="light"
     >
-      <Image width={175} height={175} src={`${process.env.REACT_APP_API_URL}/${device.img}`} />
+      <Image
+        width={175}
+        height={175}
+        src={`data:${fileData.type};base64,${fileData.base64String}`}
+      />
       <div className="text-black-50 mt-1 d-flex justify-content-between align-items-center">
         <Typography variant="subtitle1">Samsung...</Typography>
         <Typography>
-          {device.rating}
-          {' '}
-          <StarBorderIcon style={{ width: '20px' }} />
+          {device.rating} <StarBorderIcon style={{ width: '20px' }} />
         </Typography>
       </div>
       <Typography variant="subtitle1" style={{ fontWeight: 600 }}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography } from '@mui/material';
 
 const RenderElement = ({ doc }) => {
-  const fileExtension = doc.name.split('.').pop();
+  const fileExtension = doc?.name?.split('.').pop();
   const pdfIframe = (
     <iframe
       key={doc.name}
@@ -44,6 +44,8 @@ const RenderElement = ({ doc }) => {
     case 'jpeg':
       return imgElement;
     case 'png':
+      return imgElement;
+    case 'webp':
       return imgElement;
     default:
       return defIframe;
