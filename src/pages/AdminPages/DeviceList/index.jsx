@@ -4,7 +4,7 @@ import { useSnackbar } from 'notistack';
 import { DEVICE_ROUTE } from '../../../utils/consts';
 import { PageTitle, Table, ApiService, EditIcon, DeleteIcon, AddIcon } from '../../../components';
 import { getTableDefault } from '../../../components/MaterialTable/table-helper';
-import CreateDevice from './Modal';
+import CreateDevice from './CreateDevice';
 
 function DeviceList() {
   const { enqueueSnackbar } = useSnackbar();
@@ -118,7 +118,7 @@ function DeviceList() {
                 setIsOpenDeviceModal(true);
               }}
             >
-              Додати новий пристрій
+              Додати новий товар
             </Button>
           ]}
           data={getData}
@@ -131,7 +131,7 @@ function DeviceList() {
                   }}
                 />
               ),
-              tooltip: 'Редагувати пристрій',
+              tooltip: 'Редагувати товар',
               onClick: (_event, rowData) => editItem(rowData)
             }
           ]}

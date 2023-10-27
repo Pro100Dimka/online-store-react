@@ -41,6 +41,10 @@ const RenderElement = ({ doc }) => {
       return wordIframe;
     case 'jpg':
       return imgElement;
+    case 'jpeg':
+      return imgElement;
+    case 'png':
+      return imgElement;
     default:
       return defIframe;
   }

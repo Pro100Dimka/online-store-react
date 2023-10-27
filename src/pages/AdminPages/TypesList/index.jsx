@@ -94,7 +94,7 @@ function TypesList() {
                 setIsOpenTypeModal(true);
               }}
             >
-              Додати новий бренд
+              Додати новий тип
             </Button>
           ]}
           data={getData}

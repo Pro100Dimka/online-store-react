@@ -1,5 +1,5 @@
 export { default as NewFormikObject } from './getFormik';
-export { default as CustomModal } from './CustModal';
+export { default as CustomModal } from './Modal/CustModal';
 export { default as GridTextField } from './fields/GridTextField';
 export { default as ApiService } from './apiHelper/apiDevice';
 export { default as PageTitle } from './Page/PageTitle';

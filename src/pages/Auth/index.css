@@ -10,12 +10,6 @@
     padding: 5%;
 }
 
-.form-styles {
-    display: flex;
-    flex-direction: column;
-    margin-top: 10px;
-}
-
 .button-grid-element {
     display: flex;
     justify-content: flex-end;

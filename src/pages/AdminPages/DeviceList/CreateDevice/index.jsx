@@ -1,15 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Typography, Grid, MenuItem } from '@mui/material';
-import { Button } from 'react-bootstrap';
+import { Grid, MenuItem, Button } from '@mui/material';
 import { Form, FormikProvider } from 'formik';
 import { useSnackbar } from 'notistack';
 import { Context } from '../../../..';
-import CustomModal from '../../../../components/CustModal';
+import CustomModal from '../../../../components/Modal/CustModal';
 import GridTextField from '../../../../components/fields/GridTextField';
 import GridSelect from '../../../../components/fields/GridSelect';
 import ApiService from '../../../../components/apiHelper/apiDevice';
 import NewFormikObject from '../../../../components/getFormik';
-import { submit, initialValues, Schema } from '../../components/index';
+import { submit, initialValues, Schema, AcceptButtons } from '../../components/index';
 import { DEVICE_ROUTE } from '../../../../utils/consts';
 import fetchFileInfo from '../../../../components/apiHelper/fetchFile';
 import DragNDrop from '../../../../components/fields/DragNDrop';
@@ -46,7 +45,8 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
                 files.map((file) =>
                   Object.assign(file, {
                     preview: URL.createObjectURL(file)
-                  }))
+                  })
+                )
               );
             }
           })
@@ -65,24 +65,19 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
       isOpenBrandModal={isOpenDeviceModal}
       setIsOpenBrandModal={setIsOpenDeviceModal}
       labelId={labelId}
+      title={`${deviceID ? 'Редагувати' : 'Додати'} товар`}
+      sx={{ width: '60%' }}
     >
       <FormikProvider value={formik}>
-        <Form
-          autoComplete="off"
-          noValidate
-          onSubmit={handleSubmit}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginTop: '10px'
-          }}
-        >
-          {/*  */}
-          <Typography id={labelId} variant="h6" component="h2">
-            Додати новий пристрій
-          </Typography>
+        <Form autoComplete="off" noValidate onSubmit={handleSubmit} className="form-styles">
           <Grid container spacing={2}>
-            <Grid item md={5} sx={{ display: 'flex', alignItems: 'center', height: 285 }}>
+            <Grid
+              item
+              sm={12}
+              xs={12}
+              md={5}
+              sx={{ display: 'flex', alignItems: 'center', minHeight: '300px' }}
+            >
               <DragNDrop
                 file={values.img}
                 setFiles={(acceptedFiles) => {
@@ -102,34 +97,13 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
                 }}
                 onRemove={() => setFieldValue('img', [])}
               />
-              {/* <Dropzone
-                files={values.img}
-                sx={{
-                  height: '100%',
-                  bgcolor: 'lightgray',
-                  borderRadius: 2,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexDirection: 'column'
-                }}
-                onDrop={(acceptedFiles) => {
-                  setFieldValue(
-                    'img',
-                    acceptedFiles.map((file) =>
-                      Object.assign(file, {
-                        preview: URL.createObjectURL(file)
-                      })
-                    )
-                  );
-                }}
-                onRemove={() => setFieldValue('img', [])}
-              /> */}
             </Grid>
-            <Grid item md={7}>
+            <Grid item sm={12} xs={12} md={7}>
               <Grid container spacing={2}>
                 {device._types?.rows && (
                   <GridSelect
+                    sm={12}
+                    xs={12}
                     md={12}
                     labelParagraph="Оберіть тип"
                     field="typeId"
@@ -143,6 +117,8 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
                 )}
                 {device._brands?.rows && (
                   <GridSelect
+                    sm={12}
+                    xs={12}
                     md={12}
                     labelParagraph="Оберіть бренд"
                     field="brandId"
@@ -166,14 +142,16 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
                   sm={12}
                   xs={12}
                   md={12}
-                  labelParagraph="Додати назву ціну"
+                  labelParagraph="Додати ціну"
                   field="price"
                   formik={formik}
                 />
               </Grid>
             </Grid>
-            <Grid item md={12}>
-              <Button variant="outline-dark" onClick={() => addInfo()}>
+          </Grid>
+          <Grid container spacing={2} sx={{ mt: 1, mb: 3 }}>
+            <Grid item md={12} xs={12} sm={12} className="horizontal-vertical-center-flex">
+              <Button variant="contained" onClick={() => addInfo()}>
                 Додати характеристику
               </Button>
             </Grid>
@@ -183,46 +161,41 @@ function CreateDevice({ isOpenDeviceModal, setIsOpenDeviceModal, deviceID, table
                   sm={12}
                   xs={12}
                   md={4}
-                  labelParagraph="Додати назву ціну"
+                  labelParagraph="Додати ціну"
                   field="info.title"
                   formik={formik}
+                  size="small"
                 />
-                <Grid key={key + 1} item md={4}>
-                  <GridTextField
-                    sm={12}
-                    xs={12}
-                    md={4}
-                    labelParagraph="Додати опис"
-                    field="price.description"
-                    formik={formik}
-                  />
-                </Grid>
-                <Grid key={key + 2} item md={4}>
-                  <Button variant="outline-danger" onClick={() => removeInfo(i.number)}>
+                <GridTextField
+                  sm={12}
+                  xs={12}
+                  md={4}
+                  labelParagraph="Додати опис"
+                  field="price.description"
+                  formik={formik}
+                  size="small"
+                />
+                <Grid
+                  key={key + 2}
+                  item
+                  md={4}
+                  xs={12}
+                  sm={12}
+                  className="horizontal-vertical-center-flex"
+                >
+                  <Button
+                    variant="contained"
+                    color="error"
+                    onClick={() => removeInfo(i.number)}
+                    fullWidth
+                  >
                     Видалити
                   </Button>
-                </Grid>{' '}
+                </Grid>
               </>
             ))}
           </Grid>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              gap: '7px',
-              marginTop: '20px'
-            }}
-          >
-            <Button
-              variant="outline-danger"
-              onClick={() => setIsOpenDeviceModal(!isOpenDeviceModal)}
-            >
-              Закрити
-            </Button>
-            <Button variant="outline-success" type="submit">
-              Додати
-            </Button>
-          </div>
+          <AcceptButtons handleClick={() => setIsOpenDeviceModal(!isOpenDeviceModal)} />
         </Form>
       </FormikProvider>
     </CustomModal>

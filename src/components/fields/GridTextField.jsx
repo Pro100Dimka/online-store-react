@@ -1,11 +1,16 @@
 import { Grid, TextField } from '@mui/material';
 
 export default function GridTextField({
-  required, sm, xs, md, labelParagraph, field, formik
+  required,
+  sm,
+  xs,
+  md,
+  labelParagraph,
+  field,
+  formik,
+  ...props
 }) {
-  const {
-    errors, touched, values, getFieldProps, setFieldValue
-  } = formik;
+  const { errors, touched, values, getFieldProps, setFieldValue } = formik;
   return (
     <Grid item sm={sm} xs={xs} md={md}>
       <TextField
@@ -19,6 +24,7 @@ export default function GridTextField({
         inputProps={{ style: { textAlign: 'center' } }}
         helperText={touched[field] && errors[field]}
         {...getFieldProps(field)}
+        {...props}
       />
     </Grid>
   );

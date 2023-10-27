@@ -25,3 +25,8 @@ a{
     display: flex!important;
     align-items: center!important;
 }
+.form-styles {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}

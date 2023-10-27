@@ -1,13 +1,9 @@
 import React, { useEffect } from 'react';
-import { Grid, Typography } from '@mui/material';
-import { Button } from 'react-bootstrap';
+import { Grid } from '@mui/material';
 import { Form, FormikProvider } from 'formik';
 import { useSnackbar } from 'notistack';
-import GridTextField from '../../../../components/fields/GridTextField';
-import CustomModal from '../../../../components/CustModal';
-import ApiService from '../../../../components/apiHelper/apiDevice';
-import { submit, initialValues, Schema } from '../../components/index';
-import NewFormikObject from '../../../../components/getFormik';
+import { GridTextField, CustomModal, ApiService, NewFormikObject } from '../../../../components';
+import { submit, initialValues, Schema, AcceptButtons } from '../../components';
 import { BRAND_ROUTE } from '../../../../utils/consts';
 
 function CreateBrand({ isOpenBrandModal, setIsOpenBrandModal, tableRef, brandID }) {
@@ -37,22 +33,12 @@ function CreateBrand({ isOpenBrandModal, setIsOpenBrandModal, tableRef, brandID 
       isOpenBrandModal={isOpenBrandModal}
       setIsOpenBrandModal={setIsOpenBrandModal}
       labelId={labelId}
+      title={`${brandID ? 'Редагувати' : 'Додати'} бренд`}
+      sx={{ width: '30%' }}
     >
       <FormikProvider value={formik}>
-        <Form
-          autoComplete="off"
-          noValidate
-          onSubmit={handleSubmit}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginTop: '10px'
-          }}
-        >
-          <Typography id={labelId} variant="h6" component="h2">
-            Додати новий бренд
-          </Typography>
-          <Grid container spacing={2} sx={{ marginTop: '10px' }}>
+        <Form autoComplete="off" noValidate onSubmit={handleSubmit} className="form-styles">
+          <Grid container spacing={2} sx={{ mb: '5%' }}>
             <GridTextField
               sm={12}
               xs={12}
@@ -61,29 +47,8 @@ function CreateBrand({ isOpenBrandModal, setIsOpenBrandModal, tableRef, brandID 
               field="name"
               formik={formik}
             />
-            <Grid
-              item
-              sm={12}
-              xs={12}
-              md={12}
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                gap: '7px',
-                marginTop: '10px'
-              }}
-            >
-              <Button
-                variant="outline-danger"
-                onClick={() => setIsOpenBrandModal(!isOpenBrandModal)}
-              >
-                Закрити
-              </Button>
-              <Button variant="outline-success" type="submit">
-                Додати
-              </Button>
-            </Grid>
           </Grid>
+          <AcceptButtons handleClick={() => setIsOpenBrandModal(!isOpenBrandModal)} />
         </Form>
       </FormikProvider>
     </CustomModal>

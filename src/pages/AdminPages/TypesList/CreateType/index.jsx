@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { Grid, Typography } from '@mui/material';
-import { Button } from 'react-bootstrap';
+import { Grid } from '@mui/material';
 import { Form, FormikProvider } from 'formik';
 import { useSnackbar } from 'notistack';
-import { submit, initialValues, Schema } from '../../components/index';
+import { submit, initialValues, Schema, AcceptButtons } from '../../components/index';
 import { CustomModal, NewFormikObject, GridTextField, ApiService } from '../../../../components';
 import { TYPE_ROUTE } from '../../../../utils/consts';
 
@@ -33,22 +32,12 @@ function CreateType({ isOpenTypeModal, setIsOpenTypeModal, tableRef, typeID }) {
       isOpenBrandModal={isOpenTypeModal}
       setIsOpenBrandModal={setIsOpenTypeModal}
       labelId={labelId}
+      title={`${typeID ? 'Редагувати' : 'Додати'} тип`}
+      sx={{ width: '30%' }}
     >
       <FormikProvider value={formik}>
-        <Form
-          autoComplete="off"
-          noValidate
-          onSubmit={handleSubmit}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginTop: '10px'
-          }}
-        >
-          <Typography id={labelId} variant="h4" component="h2" textAlign="center">
-            Додати новий тип
-          </Typography>
-          <Grid container spacing={2} sx={{ marginTop: '10px' }}>
+        <Form autoComplete="off" noValidate onSubmit={handleSubmit} className="form-styles">
+          <Grid container spacing={2} sx={{ mb: '5%' }}>
             <GridTextField
               sm={12}
               xs={12}
@@ -57,26 +46,8 @@ function CreateType({ isOpenTypeModal, setIsOpenTypeModal, tableRef, typeID }) {
               field="name"
               formik={formik}
             />
-            <Grid
-              item
-              sm={12}
-              xs={12}
-              md={12}
-              sx={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                gap: '7px',
-                marginTop: '10px'
-              }}
-            >
-              <Button variant="outline-danger" onClick={() => setIsOpenTypeModal(!isOpenTypeModal)}>
-                Закрити
-              </Button>
-              <Button variant="outline-success" type="submit">
-                Додати
-              </Button>
-            </Grid>
           </Grid>
+          <AcceptButtons handleClick={() => setIsOpenTypeModal(!isOpenTypeModal)} />
         </Form>
       </FormikProvider>
     </CustomModal>

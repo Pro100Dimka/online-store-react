@@ -3,9 +3,7 @@ import React, { useState, useRef } from 'react';
 import './DragNDrop.css';
 import RenderElement from './RenderElement';
 
-const DragNDrop = ({
-  multiply, file, setFiles, onRemove
-}) => {
+const DragNDrop = ({ multiply, file, setFiles, onRemove }) => {
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef(null);
   const selectFiles = () => {
@@ -45,7 +43,7 @@ const DragNDrop = ({
     <div className="card">
       {(file.length === 0 || (file.length > 0 && multiply)) && (
         <div className="top">
-          <p>Загрузка файла</p>
+          <p>Завантаження файлу</p>
           {file.length !== 0 && (
             <>
               {`Выбрано ${file.length} файлов`}
@@ -61,26 +59,25 @@ const DragNDrop = ({
           onDragLeave={onDragLeave}
           onDrop={onDrop}
           style={{
-            ...(isDragging && { background: 'rgba(34, 63, 47, 0.30)' })
+            ...(isDragging && { background: 'rgba(0, 0, 0, 0.30)' })
           }}
         >
           {isDragging ? (
-            <span className="select">Перетащите файл сюда</span>
+            <span className="select">Перетягніть файл сюди</span>
           ) : (
             ((multiply && file.length > 0) || file.length === 0) && (
               <>
-                Перетащите файл сюда или
-                {' '}
+                Перетягніть файл сюди або{' '}
                 {
                   // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                   <span className="select" onClick={selectFiles}>
-                    Выберите
+                    Оберіть
                   </span>
                 }
                 <input
                   ref={fileInputRef}
                   onChange={onFileSelect}
-                  aria-label="Выберите файл"
+                  aria-label="Оберіть файл"
                   name="file"
                   type="file"
                   style={{ display: 'none' }}
@@ -90,14 +87,14 @@ const DragNDrop = ({
           )}
         </div>
       )}
-      <div className="container">
-        {file
-          && file.map((file, index) => (
+      <div className="container" style={{ height: file.length > 0 ? '90%' : 'auto' }}>
+        {file.length > 0 &&
+          file.map((file, index) => (
             <div className="image" key={index}>
               {
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
                 <span className="delete" onClick={() => deleteDocument(index)}>
-                  &times;
+                  &nbsp;&times;&nbsp;
                 </span>
               }
               <RenderElement doc={file} />

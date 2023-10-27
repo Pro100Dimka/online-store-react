@@ -72,6 +72,9 @@
     "linebreak-style": "off",
     "no-mixed-spaces-and-tabs": "off",
     "implicit-arrow-linebreak": "off",
-    "react/jsx-one-expression-per-line": "off"
+    "react/jsx-one-expression-per-line": "off",
+    "function-paren-newline": "off",
+    "operator-linebreak": "off"
+
   }
 }
