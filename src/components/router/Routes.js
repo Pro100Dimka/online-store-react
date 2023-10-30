@@ -15,6 +15,7 @@ import {
   DEVICE_ROUTE,
   DEVICES_LIST,
   BRANDS_LIST,
+  GITHUB_SITE,
   TYPES_LIST
 } from '../../utils/consts';
 import TypesList from '../../pages/AdminPages/TypesList';
@@ -58,7 +59,7 @@ export const publicRoutes = [
     Component: Auth
   },
   {
-    path: `${DEVICE_ROUTE}/:id`,
+    path: `${GITHUB_SITE}${DEVICE_ROUTE}/:id`,
     Component: Device
   }
 ];

@@ -3,7 +3,7 @@ import { Card, Typography } from '@mui/material';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 import { Image } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { DEVICE_ROUTE } from '../utils/consts';
+import { DEVICE_ROUTE, GITHUB_SITE } from '../utils/consts';
 
 const DeviceItem = ({ device }) => {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ const DeviceItem = ({ device }) => {
         cursor: 'pointer',
         padding: '10px'
       }}
-      onClick={() => navigate(`${DEVICE_ROUTE}/${device.id}`)}
+      onClick={() => navigate(`${GITHUB_SITE}${DEVICE_ROUTE}/${device.id}`)}
       border="light"
     >
       <Image

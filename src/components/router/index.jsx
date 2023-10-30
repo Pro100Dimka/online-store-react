@@ -8,12 +8,7 @@ import { Context } from '../..';
 const AppRouter = observer(() => {
   const { user } = useContext(Context);
   const { role } = user.getUser();
-  // const [isAuth, setIsauth] = useState(null);
-  // const [role, setRole] = useState(null);
-  // useEffect(() => {
-  //   setIsauth(user.getIsAuth());
-  //   setRole(user.getUser().role);
-  // }, [user._isAuth]);
+  // http://localhost:3000/online-store-react-js
   return (
     <Routes>
       {user._isAuth &&
