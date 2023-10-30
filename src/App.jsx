@@ -17,7 +17,7 @@ const App = observer(() => {
   const apiBrands = new ApiService(BRAND_ROUTE);
   const apiDevice = new ApiService(DEVICE_ROUTE);
   const { enqueueSnackbar } = useSnackbar();
-
+  console.log('123');
   useEffect(() => {
     const promises = [apiTypes.getAllItems(), apiBrands.getAllItems(), apiDevice.getAllItems()];
     Promise.all(promises)
