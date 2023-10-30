@@ -52,9 +52,11 @@ const NavBar = observer(() => {
             <Typography
               variant="h6"
               noWrap
-              component="a"
-              href={SHOP_ROUTE}
+              onClick={() => {
+                navigate(SHOP_ROUTE);
+              }}
               sx={{
+                cursor: 'pointer',
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
                 fontFamily: 'monospace',
@@ -121,9 +123,12 @@ const NavBar = observer(() => {
             <Typography
               variant="h5"
               noWrap
-              component="a"
-              href={SHOP_ROUTE}
+              component="button"
+              onClick={() => {
+                navigate(SHOP_ROUTE);
+              }}
               sx={{
+                cursor: 'pointer',
                 mr: 2,
                 display: { xs: 'flex', md: 'none' },
                 flexGrow: 1,
